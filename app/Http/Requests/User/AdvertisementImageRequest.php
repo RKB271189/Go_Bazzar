@@ -30,7 +30,7 @@ class AdvertisementImageRequest extends FormRequest
     {
         return [
             'advertisement_id' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png'
+            'image' => 'required'
         ];
     }
     public function messages(): array
