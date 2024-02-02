@@ -29,8 +29,7 @@ class AdvertisementImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'advertisement_id' => 'required',
-            'image' => 'required'
+            'advertisement_id' => 'required',            
         ];
     }
     public function messages(): array
