@@ -13,7 +13,7 @@ final class Province extends ServiceRepository
     {
         parent::__construct($province);
     }
-    public function getCollection(): Collection
+    public function getCollection(int $limit = 0): Collection
     {
         $collection = $this->province->with('city')->get();
         return $collection;

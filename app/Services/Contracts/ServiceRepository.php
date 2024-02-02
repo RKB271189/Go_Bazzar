@@ -10,9 +10,13 @@ class ServiceRepository implements ServiceInterface
     public function __construct(private Model $model)
     {
     }
-    public function getCollection(): Collection
+    public function getCollection(int $limit = 0): Collection
     {
-        return $this->model->get();
+        if ($limit === 0) {
+            return $this->model->get();
+        } else {
+            return $this->model->limit($limit)->get();
+        }
     }
     public function getCollectionById(int $id): Model
     {

@@ -135,7 +135,17 @@ return [
             'driver' => 'single',
             'path' => storage_path('logs/user_exception.log'),
             'level' => 'debug',
-        ]
+        ],
+        'bazzar_exception_log' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/bazzar_exception.log'),
+            'level' => 'debug',
+        ],
+        'bazzar_activity_log' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/bazzar_activity.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

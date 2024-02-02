@@ -134,7 +134,7 @@ class UserController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function uploadAdvertisementImage(Request $request)
+    public function uploadAdvertisementImage(AdvertisementImageRequest $request)
     {
         try {
             $user = Auth::user();

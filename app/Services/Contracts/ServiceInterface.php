@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface ServiceInterface
 {
-    public function getCollection(): Collection;
+    public function getCollection(int $limit = 0): Collection;
 
     public function getCollectionById(int $id): Model;
 

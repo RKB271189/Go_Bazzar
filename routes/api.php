@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BazzarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::get('/home', [BazzarController::class, 'home']);
+Route::get('/fetch/advertise/{id}', [UserController::class, 'singleAdvertisement']);
 Route::post('/send/code', [AuthController::class, 'sendCode']);
 Route::post('/create/account', [AuthController::class, 'createAccount']);
 Route::post('/verify/account', [AuthController::class, 'verifyAccount']);
@@ -29,7 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/fetch/profile', [UserController::class, 'fetchProfile']);
     Route::post('/create/profile', [UserController::class, 'createProfile']);
     Route::get('/fetch/advertise', [UserController::class, 'advertisment']);
-    Route::get('/fetch/advertise/{id}', [UserController::class, 'singleAdvertisement']);
     Route::post('/create/advertise', [UserController::class, 'createAdvertisement']);
     Route::post('/upload/advertise/image', [UserController::class, 'uploadAdvertisementImage']);
 });

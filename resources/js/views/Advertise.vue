@@ -3,61 +3,53 @@
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
     <template v-slot:page-content>
-      <Title :heading="'Discover more good finds'" />
-      <AdvertiseCard
-        :advertisements="advertisements"
-        @advertiseDetail="viewDetail"
-      />
-      <Title :heading="'Our Market Place'" />
-      <Thumbnail />
+      <AdvertiseDetail :advertisement="advertisement" />
     </template>
   </Layout>
 </template>
 
 <script>
 import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import Layout from "../components/user/Layout.vue";
-import AdvertiseCard from "../components/AdvertiseCard.vue";
-import Title from "../components/user/partials/Title.vue";
-import Thumbnail from "../components/user/partials/Thumbnail.vue";
 import Loader from "../components/Loader.vue";
 import Toast from "../components/Toast.vue";
 import useAPIRequest from "../services/api-request";
+import AdvertiseDetail from "../components/AdvertiseDetail.vue";
 export default {
   components: {
     Loader,
     Toast,
     Layout,
-    AdvertiseCard,
-    Title,
-    Thumbnail,
+    AdvertiseDetail,
   },
   setup() {
     const router = useRouter();
     const store = useStore();
+    const route = useRoute();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
-    const advertisements = computed(
-      () => store.getters["Bazzar/advertisements"]
-    );
+    const advertisement = computed(() => store.getters["Bazzar/advertisement"]);
     onMounted(() => {
-      fetchHomeDetails();
+      fetchAdvertisementDetails();
     });
-    const fetchHomeDetails = async () => {
-      await handleAPIRequest("Bazzar", "Bazzar/FETCH_HOME_DETAILS");
-    };
-    const viewDetail = (id) => {
-      router.push("/advertisement/" + id);
+    const fetchAdvertisementDetails = async () => {
+      const params = {
+        id: route.params.id,
+      };
+      await handleAPIRequest(
+        "Bazzar",
+        "Bazzar/FETCH_ADVERTISEMENT_DETAILS",
+        params
+      );
     };
     return {
       loading,
       showToast,
       message,
       hasError,
-      advertisements,
-      viewDetail,
+      advertisement,
     };
   },
 };
