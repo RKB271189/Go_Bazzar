@@ -35,7 +35,7 @@ class AdvertisementRequest extends FormRequest
             'description' => 'required',
             'expiry_date' => 'required',
             'address' => 'required',
-            'thumb_nail' => 'sometimes',
+            'thumb_nail' => 'sometimes|mimes:jpeg,jpg,png',
             'price' => 'required',
         ];
     }

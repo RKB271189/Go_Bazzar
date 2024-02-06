@@ -9,31 +9,28 @@
             class="img-fluid adv-image-main"
             data-bs-toggle="modal"
             data-bs-target="#imageModal"
+            @click="openImage(advertisement.thumb_nail, -1)"
           />
         </div>
         <div class="col-md-3 mt-md-0 mt-2">
           <div class="row">
-            <div class="col-md-12 col-4">
+            <div
+              class="col-md-12 col-4"
+              v-for="(image, index) in advertisement.image"
+              :key="image.id"
+              :class="index === 2 ? 'position-relative' : ''"
+            >
               <img
-                :src="advertisement.image[0].image"
+                v-if="index < 3 && advertisement.image[index].image !== null"
+                :src="advertisement.image[index].image"
                 alt="Product Image 1"
                 class="img-fluid adv-images-small"
+                :class="index > 0 ? 'my-md-2 my-0' : ''"
+                data-bs-toggle="modal"
+                data-bs-target="#imageModal"
+                @click="openImage(advertisement.image[index].image, index)"
               />
-            </div>
-            <div class="col-md-12 col-4">
-              <img
-                :src="advertisement.image[1].image"
-                alt="Product Image 1"
-                class="img-fluid adv-images-small my-md-2 my-0"
-              />
-            </div>
-            <div class="col-md-12 col-4 position-relative">
-              <img
-                :src="advertisement.image[2].image"
-                alt="Product Image 1"
-                class="img-fluid adv-images-small my-md-2 my-0"
-              />
-              <div class="image-overlay">
+              <div v-if="index === 2 && advertisement.image[index].image !== null" class="image-overlay">
                 <p>More Images</p>
               </div>
             </div>
@@ -122,7 +119,7 @@
       <div class="modal-content">
         <div class="modal-body text-center">
           <img
-            :src="'/images/car-1.webp'"
+            :src="modalImages"
             alt="Modal Image"
             class="img-fluid"
             id="modalImage"
@@ -141,6 +138,7 @@
           class="btn btn-light position-absolute top-50 start-0 translate-middle-y"
           id="prevButton"
           style="left: 8% !important"
+          @click="previousImage"
         >
           <span class="fs-3">&lt;</span>
         </button>
@@ -148,6 +146,7 @@
           type="button"
           class="btn btn-light position-absolute top-50 end-0 translate-middle-y"
           id="nextButton"
+          @click="nextImage"
           style="right: 8% !important"
         >
           <span class="fs-3">&gt;</span>
@@ -158,9 +157,48 @@
 </template>
 
 <script>
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 export default {
-  props: {
-    advertisement: Object,
+  setup() {
+    const store = useStore();
+    const modalImages = ref("");
+    const imageIndex = ref("");
+    const openImage = (image, index) => {
+      modalImages.value = image;
+      imageIndex.value = index;
+    };
+    const advertisement = computed(() => store.getters["Bazzar/advertisement"]);
+    const objImageLength = ref(0);
+    //objImageLength.value = advertisement.value.image.length;
+    const nextImage = () => {
+      if (
+        imageIndex.value >= -1 &&
+        imageIndex.value < Object.keys(advertisement.value.image).length - 1
+      ) {
+        imageIndex.value = imageIndex.value + 1;
+        modalImages.value = advertisement.value.image[imageIndex.value].image;
+      }
+    };
+    const previousImage = () => {
+      if (imageIndex.value >= -1) {
+        imageIndex.value = imageIndex.value - 1;
+        if (imageIndex.value === -1) {
+          modalImages.value = advertisement.value.thumb_nail;
+        } else {
+          modalImages.value = advertisement.value.image[imageIndex.value].image;
+        }
+      }
+    };
+    return {
+      modalImages,
+      imageIndex,
+      advertisement,
+      objImageLength,
+      openImage,
+      nextImage,
+      previousImage,
+    };
   },
 };
 </script>

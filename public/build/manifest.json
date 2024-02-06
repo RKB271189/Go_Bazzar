@@ -5,7 +5,7 @@
     "src": "resources/css/app.css"
   },
   "resources/css/bazzar.css": {
-    "file": "assets/bazzar-2_U1qfT9.css",
+    "file": "assets/bazzar-neIJRygM.css",
     "isEntry": true,
     "src": "resources/css/bazzar.css"
   },
@@ -18,7 +18,7 @@
     "css": [
       "assets/app-tkZJNhXH.css"
     ],
-    "file": "assets/app-MXn14GqQ.js",
+    "file": "assets/app-s7YAS65w.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

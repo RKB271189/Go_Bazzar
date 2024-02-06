@@ -362,11 +362,13 @@ body {
 }
 
 .adv-image-main {
+    cursor: pointer;
     width: 100%;
     height: 360px;
 }
 
 .adv-images-small {
+    cursor: pointer;
     width: 150px;
 }
 
