@@ -29,6 +29,15 @@
         </span>
         Advertise
       </router-link>
+      <router-link
+        class="list-group-item list-group-item-action list-group-item-light p-3"
+        to="/list/other"
+      >
+        <span class="badge bg-success">
+          <SparklesIcon class="hero-icon"></SparklesIcon>
+        </span>
+        Others
+      </router-link>
       <a
         class="list-group-item list-group-item-action list-group-item-light p-3"
         href="#!"
@@ -56,6 +65,7 @@ import {
   TableCellsIcon,
   UserGroupIcon,
   MegaphoneIcon,
+  SparklesIcon,
   DocumentDuplicateIcon,
   CalendarDaysIcon,
 } from "@heroicons/vue/24/outline";
@@ -64,6 +74,7 @@ export default {
     TableCellsIcon,
     UserGroupIcon,
     MegaphoneIcon,
+    SparklesIcon,
     DocumentDuplicateIcon,
     CalendarDaysIcon,
   },

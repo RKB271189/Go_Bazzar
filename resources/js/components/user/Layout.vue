@@ -4,6 +4,7 @@
     <div class="row">
       <div class="col-md-2">
         <!-- Side Navigation and Others Here -->
+        <slot name="advertise-nav"></slot>
         <slot name="menu-content"></slot>
         <SideNav />
         <slot name="other-content"></slot>

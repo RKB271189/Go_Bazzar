@@ -404,6 +404,10 @@ body {
     background-color: transparent;
 }
 
+.other-services-business-card-info {
+    height: 75px;
+}
+
 @media all and (min-width: 992px) {
 
     .dropdown-menu li {

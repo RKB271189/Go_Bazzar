@@ -5,9 +5,28 @@
         <MegaphoneIcon class="hero-icon"></MegaphoneIcon>
       </div>
       <div>
-        <span class="m-0 d-block nav-link-sidebar">Free Ads</span>
+        <router-link to="/advertisement/list" style="text-decoration: none"
+          ><span class="m-0 d-block nav-link-sidebar"
+            >Free Ads</span
+          ></router-link
+        >
         <span class="m-0 d-block quick-link-content"
-          >Events, Movies and more</span
+          >Auto, Furniture and more</span
+        >
+      </div>
+    </div>
+    <div class="col-12 d-flex align-items-center p-2">
+      <div class="icon-container-sidebar me-2">
+        <WrenchScrewdriverIcon class="hero-icon"></WrenchScrewdriverIcon>
+      </div>
+      <div>
+        <router-link :to="'/service/list'" style="text-decoration: none"
+          ><span class="m-0 d-block nav-link-sidebar"
+            >Services</span
+          ></router-link
+        >
+        <span class="m-0 d-block quick-link-content"
+          >Account, Finance and more</span
         >
       </div>
     </div>
@@ -18,7 +37,7 @@
       <div>
         <span class="m-0 d-block nav-link-sidebar">Business Directory</span>
         <span class="m-0 d-block quick-link-content"
-          >Events, Movies and more</span
+          >Travel, Real Estate and more</span
         >
       </div>
     </div>
@@ -29,22 +48,11 @@
       <div>
         <span class="m-0 d-block nav-link-sidebar">News Paper</span>
         <span class="m-0 d-block quick-link-content"
-          >Events, Movies and more</span
+          >Hindi, Gujarati and more</span
         >
       </div>
     </div>
-    <div class="col-12 d-flex align-items-center p-2">
-      <div class="icon-container-sidebar me-2">
-        <WrenchScrewdriverIcon class="hero-icon"></WrenchScrewdriverIcon>
-      </div>
-      <div>
-        <span class="m-0 d-block nav-link-sidebar">Services</span>
-        <span class="m-0 d-block quick-link-content"
-          >Events, Movies and more</span
-        >
-      </div>
-    </div>
-    <div class="col-12 d-flex align-items-center p-2">
+    <!-- <div class="col-12 d-flex align-items-center p-2">
       <div class="icon-container-sidebar me-2">
         <BuildingStorefrontIcon class="hero-icon"></BuildingStorefrontIcon>
       </div>
@@ -54,7 +62,7 @@
           >Events, Movies and more</span
         >
       </div>
-    </div>
+    </div> -->
     <div class="col-12 d-flex align-items-center p-2">
       <div class="icon-container-sidebar me-2">
         <SparklesIcon class="hero-icon"></SparklesIcon>
@@ -62,7 +70,7 @@
       <div>
         <span class="m-0 d-block nav-link-sidebar">Others</span>
         <span class="m-0 d-block quick-link-content"
-          >Events, Movies and more</span
+          >Health, Education and more</span
         >
       </div>
     </div>

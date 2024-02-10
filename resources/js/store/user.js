@@ -7,7 +7,12 @@ function initialState() {
         profile: [],
         advertisements: {},
         advertisement: {},
-        sub_categories: []
+        sub_categories: [],
+        sub_sub_categories: [],
+        services: {},
+        service: {},
+        businesses: {},
+        business: {}
     }
 }
 const getters = {
@@ -17,7 +22,12 @@ const getters = {
     profile: state => state.profile,
     advertisements: state => state.advertisements,
     advertisement: state => state.advertisement,
-    sub_categories: state => state.sub_categories
+    sub_categories: state => state.sub_categories,
+    sub_sub_categories: state => state.sub_sub_categories,
+    services: state => state.services,
+    service: state => state.service,
+    businesses: state => state.businesses,
+    business: state => state.business,
 }
 const actions = {
     async USER_FETCH_PROFILE({ commit }) {
@@ -105,6 +115,84 @@ const actions = {
             commit('SET_ERROR', error.response.data.error)
         }
     },
+    async USER_FETCH_SERVICE({ commit }, params) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            let res = await axios.get('/api/fetch/service/' + params.id);
+            if (res.status === 200) {
+                commit('SET_PROVINCE', res.data.province);
+                commit('SET_SUB_CATEGORIES', res.data.service_categories);
+                commit('SET_SERVICE', res.data.service);
+            }
+        } catch (error) {
+            commit('SET_STATUS', error.response.status);
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
+    async USER_FETCH_OTHERS({ commit }) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            let res = await axios.get('/api/fetch/others');
+            if (res.status === 200) {
+                commit('SET_PROVINCE', res.data.province);
+                commit('SET_SUB_CATEGORIES', res.data.ad_categories);
+                commit('SET_SERVICES', res.data.service);
+                commit('SET_BUSINESSES', res.data.business);
+            }
+        } catch (error) {
+            commit('SET_STATUS', error.response.status);
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
+    async USER_CREATE_SERVICE({ commit }, params) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            let res = await axios.post('/api/create/service', params, config)
+            if (res.status === 200) {
+                commit('SET_SUCCESS', res.data.message);
+                commit('SET_SERVICE', res.data.service);
+            }
+        } catch (error) {
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
+    async USER_FETCH_BUSINESS({ commit }, params) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            let res = await axios.get('/api/fetch/business/' + params.id);
+            if (res.status === 200) {
+                commit('SET_PROVINCE', res.data.province);
+                commit('SET_SUB_CATEGORIES', res.data.business_categories);
+                commit('SET_SUB_SUB_CATEGORIES', res.data.business_sub_categories);
+                commit('SET_SERVICE', res.data.service);
+            }
+        } catch (error) {
+            commit('SET_STATUS', error.response.status);
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
+    async USER_CREATE_BUSINESS({ commit }, params) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            let res = await axios.post('/api/create/business', params, config)
+            if (res.status === 200) {
+                commit('SET_SUCCESS', res.data.message);
+                commit('SET_SERVICE', res.data.business);
+            }
+        } catch (error) {
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
 }
 const mutations = {
     ...commonMutations,
@@ -125,6 +213,21 @@ const mutations = {
     },
     SET_SUB_CATEGORIES(state, value) {
         state.sub_categories = value;
+    },
+    SET_SERVICE(state, value) {
+        state.service = value;
+    },
+    SET_BUSINESS(state, value) {
+        state.business = value;
+    },
+    SET_BUSINESSES(state, value) {
+        state.businesses = value;
+    },
+    SET_SERVICES(state, value) {
+        state.services = value;
+    },
+    SET_SUB_SUB_CATEGORIES(state, value) {
+        state.sub_sub_categories = value;
     }
 }
 export default {

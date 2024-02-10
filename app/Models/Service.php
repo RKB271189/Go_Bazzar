@@ -5,34 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Advertisement extends Model
+class Service extends Model
 {
     use HasFactory;
-
-    protected  $table = 'advertisements';
+    protected  $table = 'services';
 
     protected  $fillable = [
         'profile_id',
         'province_id',
         'city_id',
         'sub_category_id',
-        'thumb_nail',
+        'service_picture',
+        'service_email',
+        'service_no',
         'title',
         'description',
-        'expiry_date',
         'address',
-        'price',
-        'is_available',
-        'is_sold',
         'is_approved'
     ];
-    public function getThumbNailAttribute()
+    public function getServicePictureAttribute()
     {
-        if (array_key_exists('thumb_nail', $this->attributes)) {
-            if ($this->attributes['thumb_nail'] != null)
-                return '/storage/' . $this->attributes['thumb_nail'];
-            return '/images/no-image.jpg';
+        if (array_key_exists('service_picture', $this->attributes)) {
+            if ($this->attributes['service_picture'] != null)
+                return '/storage/' . $this->attributes['service_picture'];
+            return '/images/avatar.png';
         }
+    }
+    public function subcategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
     public function profile()
     {
@@ -45,9 +46,5 @@ class Advertisement extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
-    }
-    public function image()
-    {
-        return $this->hasMany(AdvertisementImage::class);
     }
 }
