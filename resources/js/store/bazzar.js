@@ -28,6 +28,8 @@ const actions = {
             let res = await axios.get('/api/home')
             if (res.status === 200) {
                 commit('SET_ADVERTISEMENTS', res.data.advertisements);
+                commit('SET_SERVICES', res.data.services);
+                commit('SET_BUSINESSES', res.data.businesses);
                 commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
                 commit('SET_QUICK_ADVERTISEMENTS', res.data.quickadvertisements);
@@ -78,7 +80,7 @@ const actions = {
             if (res.status === 200) {
                 // commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
-                commit('SET_BUSINESSES', res.data.business);
+                commit('SET_BUSINESSES', res.data.businesses);
             }
         } catch (error) {
             commit('SET_ERROR', error.response.data.error)

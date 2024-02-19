@@ -20,34 +20,36 @@
             <h6 class="text-uppercase fw-bold mb-3">Quick Links</h6>
             <span class="text-muted d-block">
               <router-link
-                to="/advertisement"
+                to="/advertisement/list"
                 class="text-reset text-decoration-none"
                 >Free Ads</router-link
               >
             </span>
             <span class="text-muted d-block mt-1">
               <router-link
-                to="/services"
+                to="/service/list"
                 class="text-reset text-decoration-none"
                 >Services</router-link
               >
             </span>
             <span class="text-muted d-block mt-1">
               <router-link
-                to="/businesses"
+                to="/business/list"
                 class="text-reset text-decoration-none"
                 >Business</router-link
               >
             </span>
             <span class="text-muted d-block mt-1">
               <router-link
-                to="/newspapers"
+                to="/newspaper/list"
                 class="text-reset text-decoration-none"
                 >News Paper</router-link
               >
             </span>
             <span class="text-muted d-block mt-1">
-              <router-link to="/others" class="text-reset text-decoration-none"
+              <router-link
+                to="/others/list"
+                class="text-reset text-decoration-none"
                 >Others</router-link
               >
             </span>

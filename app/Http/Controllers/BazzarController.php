@@ -28,7 +28,7 @@ class BazzarController extends Controller
     {
         try {
             $subCategories = $this->subCategory->getCollection();
-            $advertisements = $this->advertisement->getCollection(8);
+            $advertisements = $this->advertisement->getCollection(4);
             $advertisements = AdvertisementResource::collection($advertisements);
             $quickAdvertisements = [
                 [
@@ -52,7 +52,11 @@ class BazzarController extends Controller
                     'link' => '/advertisement/list/auto-2',
                 ],
             ];
-            return response()->json(['subcategories' => $subCategories, 'advertisements' => $advertisements, 'quickadvertisements' => $quickAdvertisements], 200);
+            $services = $this->service->getCollection(8);
+            $services = ServiceResource::collection($services);
+            $businesses = $this->business->getCollection(8);
+            $businesses = BusinessResource::collection($businesses);
+            return response()->json(['subcategories' => $subCategories, 'advertisements' => $advertisements, 'quickadvertisements' => $quickAdvertisements, 'services' => $services, 'businesses' => $businesses], 200);
         } catch (Exception $ex) {
             Log::channel('bazzar_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
@@ -91,11 +95,11 @@ class BazzarController extends Controller
     public function business()
     {
         try {
-            $business = $this->business->getCollection();
-            $subCategory = $this->subCategory->getSubCategoryByMainId(2);
-            $subSubCategory = $this->subSubCategory->getCollection();
-            $business = BusinessResource::collection($business);
-            return response()->json(['subcategories' => $subCategory, 'subsubcategories' => $subSubCategory, 'business' => $business,], 200);
+            $businesses = $this->business->getCollection();
+            // $subCategory = $this->subCategory->getSubCategoryByMainId(2);
+            // $subSubCategory = $this->subSubCategory->getCollection();
+            $businesses = BusinessResource::collection($businesses);
+            return response()->json(['businesses' => $businesses,], 200);
         } catch (Exception $ex) {
             Log::channel('bazzar_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
