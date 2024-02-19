@@ -5,7 +5,7 @@
         <MegaphoneIcon class="hero-icon"></MegaphoneIcon>
       </div>
       <div>
-        <router-link to="/advertisement/list" style="text-decoration: none"
+        <router-link to="/advertisement/list" class="text-decoration-none"
           ><span class="m-0 d-block nav-link-sidebar"
             >Free Ads</span
           ></router-link
@@ -20,7 +20,7 @@
         <WrenchScrewdriverIcon class="hero-icon"></WrenchScrewdriverIcon>
       </div>
       <div>
-        <router-link :to="'/service/list'" style="text-decoration: none"
+        <router-link :to="'/service/list'" class="text-decoration-none"
           ><span class="m-0 d-block nav-link-sidebar"
             >Services</span
           ></router-link
@@ -35,7 +35,9 @@
         <PhoneArrowUpRightIcon class="hero-icon"></PhoneArrowUpRightIcon>
       </div>
       <div>
-        <span class="m-0 d-block nav-link-sidebar">Business Directory</span>
+        <router-link :to="'/business/list'" class="text-decoration-none">
+          <span class="m-0 d-block nav-link-sidebar">Business Directory</span>
+        </router-link>
         <span class="m-0 d-block quick-link-content"
           >Travel, Real Estate and more</span
         >

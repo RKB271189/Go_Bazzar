@@ -12,6 +12,10 @@ final class SubCategory extends ServiceRepository
     {
         parent::__construct($subCategory);
     }
+    public function getCollection(int $limit = 0): Collection
+    {
+        return $this->subCategory->with('subsubcategory')->get();
+    }
     public function getSubCategoryByMainId(int $mainId): Collection
     {
         return $this->subCategory->where('category_id', $mainId)->get();

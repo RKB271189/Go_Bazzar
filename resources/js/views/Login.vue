@@ -135,6 +135,27 @@
                       >
                     </p>
                   </div>
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <hr />
+                      </div>
+                      <div class="col-md-2">OR</div>
+                      <div class="col-md-5">
+                        <hr />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <p class="m-0 text-secondary text-center">
+                      Go to
+                      <router-link
+                        class="link-primary text-decoration-none"
+                        to="/"
+                        >Home</router-link
+                      >
+                    </p>
+                  </div>
                 </div>
               </form>
             </div>

@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import AdvertisementList from '../views/AdvertiseList.vue';
 import Advertisement from '../views/Advertise.vue';
 import ServiceList from '../views/Service.vue';
+import BusinessList from '../views/Directory.vue';
 import Directory from '../views/Directory.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
@@ -23,19 +24,24 @@ const routes = [
         component: Home,
     },
     {
-        path: '/advertisement/list',
+        path: '/advertisement/list/:slug?',
         name: 'AdvertisementList',
         component: AdvertisementList,
-    },
-    {
-        path: '/service/list',
-        name: 'ServiceList',
-        component: ServiceList,
     },
     {
         path: '/advertisement/:id',
         name: 'Advertisement',
         component: Advertisement,
+    },
+    {
+        path: '/service/list/:slug?',
+        name: 'ServiceList',
+        component: ServiceList,
+    },
+    {
+        path: '/business/list/:slug?',
+        name: 'BusinessList',
+        component: BusinessList,
     },
     {
         path: '/directory',

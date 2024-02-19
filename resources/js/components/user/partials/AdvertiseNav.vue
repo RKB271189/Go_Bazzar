@@ -31,8 +31,14 @@
               class="list-group-item"
               v-for="val in subcategories"
               :key="val.id"
+              style="font-size: 14px"
             >
-              {{ val.name }}
+              <router-link
+                class="text-decoration-none"
+                :to="'/' + linktype + '/list/' + val.name + '-' + val.id"
+              >
+                {{ val.name }}</router-link
+              >
             </li>
           </ul>
         </div>
@@ -47,6 +53,7 @@ export default {
   props: {
     mainname: String,
     subcategories: Object,
+    linktype: String,
   },
   components: {
     FunnelIcon,

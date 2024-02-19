@@ -17,12 +17,12 @@ class SubSubCategorySeeder extends Seeder
             [
                 'category_id' => 2,
                 'sub_category_id' => 14,
-                'name' => 'Taxi/Cab'
+                'name' => 'Taxi or Cab'
             ],
             [
                 'category_id' => 2,
                 'sub_category_id' => 14,
-                'name' => 'Hotels/Motels'
+                'name' => 'Hotels or Motels'
             ],
             [
                 'category_id' => 2,
@@ -47,7 +47,7 @@ class SubSubCategorySeeder extends Seeder
             [
                 'category_id' => 2,
                 'sub_category_id' => 15,
-                'name' => 'Courier/Shipping'
+                'name' => 'Courier or Shipping'
             ],
             [
                 'category_id' => 2,

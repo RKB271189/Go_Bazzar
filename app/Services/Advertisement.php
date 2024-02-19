@@ -23,4 +23,9 @@ final class Advertisement extends ServiceRepository
         $collection = $this->advertisement->with('province')->with('city')->with('profile')->with('image')->where('id', $id)->first();
         return $collection ? $collection : null;
     }
+    public function getCollectionByCategoryId(int $subCategoryId): ?Collection
+    {
+        $collection = $this->advertisement->with('province')->with('city')->with('profile')->where('sub_category_id', $subCategoryId)->get();
+        return $collection ? $collection : null;
+    }
 }

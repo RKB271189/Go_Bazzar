@@ -21,8 +21,12 @@ export default function accessLocalStorage() {
         }
         return item.value;
     };
+    const removeLocalStorage = (key) => {
+        localStorage.removeItem(key);
+    }
     return {
         setLocalStorage,
-        getLocalStorage
+        getLocalStorage,
+        removeLocalStorage
     }
 }

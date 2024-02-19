@@ -1,11 +1,9 @@
 <template>
-  <Navigation />
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <SideNav />
-      </div>
-      <div class="col-md-10">
+  <Loader v-if="loading"></Loader>
+  <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
+  <Layout>
+    <template v-slot:page-content>
+      <div class="container-fluid">
         <section class="mb-4">
           <h2 class="h1-responsive font-weight-bold text-center my-4">
             Contact us
@@ -78,39 +76,49 @@
               <ul class="list-unstyled mb-0">
                 <li>
                   <MapPinIcon class="mt-0 hero-icon"></MapPinIcon>
-                  <p>San Francisco, CA 94126, USA</p>
+                  <p>2830 Gordon Road, Regina, SK</p>
                 </li>
                 <li>
                   <PhoneIcon class="mt-4 hero-icon"></PhoneIcon>
-                  <p>+ 01 234 567 89</p>
+                  <p>+ 306 510 7099</p>
                 </li>
                 <li>
                   <EnvelopeIcon class="mt-4 hero-icon"></EnvelopeIcon>
-                  <p>contact@mdbootstrap.com</p>
+                  <p>info@gobazzar.com</p>
                 </li>
               </ul>
             </div>
           </div>
         </section>
       </div>
-    </div>
-    <Footer></Footer>
-  </div>
+    </template>
+  </Layout>
 </template>
 
 <script>
-import Navigation from "../components/user/Navigation.vue";
-import SideNav from "../components/user/partials/SideNav.vue";
-import Footer from "../components/user/Footer.vue";
+import Layout from "../components/user/Layout.vue";
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from "@heroicons/vue/24/outline";
+import Loader from "../components/Loader.vue";
+import Toast from "../components/Toast.vue";
+import useAPIRequest from "../services/api-request";
 export default {
   components: {
-    Navigation,
-    SideNav,
-    Footer,
+    Layout,
+    Loader,
+    Toast,
     MapPinIcon,
     PhoneIcon,
     EnvelopeIcon,
+  },
+  setup() {
+    const { hasError, message, loading, showToast, handleAPIRequest } =
+      useAPIRequest();
+    return {
+      loading,
+      showToast,
+      message,
+      hasError,
+    };
   },
 };
 </script>

@@ -25,7 +25,7 @@ Route::post('/send/code', [AuthController::class, 'sendCode']);
 Route::post('/create/account', [AuthController::class, 'createAccount']);
 Route::post('/verify/account', [AuthController::class, 'verifyAccount']);
 Route::get('/home', [BazzarController::class, 'home']);
-Route::get('/advertise', [BazzarController::class, 'advertise']);
+Route::get('/advertise/{slug?}', [BazzarController::class, 'advertise']);
 Route::get('/service', [BazzarController::class, 'service']);
 Route::get('/business', [BazzarController::class, 'business']);
 Route::get('/fetch/advertise/{id}', [UserController::class, 'singleAdvertisement']);
@@ -42,3 +42,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/create/service', [UserController::class, 'createService']);
     Route::post('/create/business', [UserController::class, 'createBusiness']);
 });
+Route::post('logout', [AuthController::class, 'logout']);

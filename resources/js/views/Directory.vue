@@ -4,8 +4,7 @@
   <Layout>
     <template v-slot:menu-content>
       <SubSideNav
-        :subcategories="subcategories"
-        :subsubcategories="subsubcategories"
+        :subcategories="businessType"        
       />
     </template>
     <template v-slot:page-content>
@@ -38,10 +37,10 @@ export default {
     const store = useStore();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
-    const subcategories = computed(() => store.getters["Bazzar/subcategories"]);
-    const subsubcategories = computed(
-      () => store.getters["Bazzar/subsubcategories"]
-    );
+    const subcategories = computed(() => store.state.Bazzar.subcategories);
+    const businessType = computed(() => {
+      return subcategories.value.filter((val) => val.category_id === 2);
+    });    
     const business = computed(() => store.getters["Bazzar/businesses"]);
     onMounted(() => {
       fetchBusinessDetails();
@@ -54,8 +53,7 @@ export default {
       showToast,
       message,
       hasError,
-      subcategories,
-      subsubcategories,
+      businessType,      
       business,
     };
   },

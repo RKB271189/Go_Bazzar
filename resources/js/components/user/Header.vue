@@ -49,7 +49,6 @@
     <div class="border-bottom border-top" id="subNavContainer">
       <Menu></Menu>
     </div>
-    <!-- News Component Here -->
   </div>
 </template>
 

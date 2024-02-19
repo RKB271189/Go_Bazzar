@@ -9,51 +9,89 @@
               Go Bazzar
             </h6>
             <p>
-              Here you can use rows and columns to organize your footer content.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Join us in cultivating a thriving community where meaningful
+              connections are made, entrepreneurial endeavors flourish, and
+              opportunities for collaboration abound. Explore a marketplace that
+              goes beyond transactions, offering a space for genuine
+              interactions and the exchange of ideas.
             </p>
           </div>
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 class="text-uppercase fw-bold mb-3">Products</h6>
+            <h6 class="text-uppercase fw-bold mb-3">Quick Links</h6>
             <span class="text-muted d-block">
-              <a href="#!" class="text-reset text-decoration-none">Angular</a>
+              <router-link
+                to="/advertisement"
+                class="text-reset text-decoration-none"
+                >Free Ads</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">React</a>
+              <router-link
+                to="/services"
+                class="text-reset text-decoration-none"
+                >Services</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">Vue</a>
+              <router-link
+                to="/businesses"
+                class="text-reset text-decoration-none"
+                >Business</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">Laravel</a>
+              <router-link
+                to="/newspapers"
+                class="text-reset text-decoration-none"
+                >News Paper</router-link
+              >
+            </span>
+            <span class="text-muted d-block mt-1">
+              <router-link to="/others" class="text-reset text-decoration-none"
+                >Others</router-link
+              >
             </span>
           </div>
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-3">Useful links</h6>
             <span class="text-muted d-block">
-              <a href="#!" class="text-reset text-decoration-none">Pricing</a>
+              <router-link
+                to="/advertisement/autos"
+                class="text-reset text-decoration-none"
+                >Ads - Auto</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">Settings</a>
+              <router-link
+                to="/services/home-food"
+                class="text-reset text-decoration-none"
+                >Services - Home Food</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">Orders</a>
+              <router-link
+                to="/terms-policy"
+                class="text-reset text-decoration-none"
+                >Terms & Policy</router-link
+              >
             </span>
             <span class="text-muted d-block mt-1">
-              <a href="#!" class="text-reset text-decoration-none">Help</a>
+              <router-link
+                to="/agreements"
+                class="text-reset text-decoration-none"
+                >Agreements</router-link
+              >
             </span>
           </div>
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <h6 class="text-uppercase fw-bold mb-3">Contact</h6>
-            <p>
-              <MapIcon class="hero-icon-small"></MapIcon> New York, NY 10012, US
-            </p>
+            <p><MapIcon class="hero-icon-small"></MapIcon> 2830 Gordon Road</p>
             <p>
               <EnvelopeIcon class="hero-icon-small"></EnvelopeIcon>
-              info@example.com
+              info@gobazzar.com
             </p>
             <p>
-              <PhoneIcon class="hero-icon-small"></PhoneIcon> + 01 234 567 88
+              <PhoneIcon class="hero-icon-small"></PhoneIcon> +1 306 510 7099
             </p>
           </div>
         </div>

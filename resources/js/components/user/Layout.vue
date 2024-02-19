@@ -1,5 +1,5 @@
 <template>
-  <Navigation />
+  <Header />
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
@@ -19,17 +19,14 @@
 </template>
 
 <script>
-import Navigation from "./Navigation.vue";
+import Header from "./Header.vue";
 import SideNav from "./partials/SideNav.vue";
 import Footer from "./Footer.vue";
 export default {
   components: {
-    Navigation,
     SideNav,
-    // AdvertiseCard,
-    // Title,
-    // Thumbnail,
     Footer,
+    Header,
   },
 };
 </script>

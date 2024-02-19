@@ -4,6 +4,7 @@ function initialState() {
         ...commonInitialState,
         subcategories: {},
         subsubcategories: {},
+        quickadvertisements: {},
         advertisements: {},
         advertisement: {},
         services: {},
@@ -14,6 +15,7 @@ const getters = {
     ...commonGetters,
     subcategories: state => state.subcategories,
     subsubcategories: state => state.subsubcategories,
+    quickadvertisements: state => state.quickadvertisements,
     advertisements: state => state.advertisements,
     advertisement: state => state.advertisement,
     services: state => state.services,
@@ -25,7 +27,10 @@ const actions = {
         try {
             let res = await axios.get('/api/home')
             if (res.status === 200) {
-                commit('SET_ADVERTISEMENTS', res.data.advertisements)
+                commit('SET_ADVERTISEMENTS', res.data.advertisements);
+                commit('SET_SUB_CATEGORIES', res.data.subcategories);
+                // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
+                commit('SET_QUICK_ADVERTISEMENTS', res.data.quickadvertisements);
             }
         } catch (error) {
             commit('SET_ERROR', error.response.data.error)
@@ -36,7 +41,7 @@ const actions = {
         try {
             let res = await axios.get('/api/advertise')
             if (res.status === 200) {
-                commit('SET_SUB_CATEGORIES', res.data.subcategories);
+                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 commit('SET_ADVERTISEMENTS', res.data.advertisements);
             }
         } catch (error) {
@@ -59,7 +64,7 @@ const actions = {
         try {
             let res = await axios.get('/api/service')
             if (res.status === 200) {
-                commit('SET_SUB_CATEGORIES', res.data.subcategories);
+                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 commit('SET_SERVICES', res.data.services);
             }
         } catch (error) {
@@ -71,8 +76,8 @@ const actions = {
         try {
             let res = await axios.get('/api/business')
             if (res.status === 200) {
-                commit('SET_SUB_CATEGORIES', res.data.subcategories);
-                commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
+                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
+                // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
                 commit('SET_BUSINESSES', res.data.business);
             }
         } catch (error) {
@@ -87,6 +92,9 @@ const mutations = {
     },
     SET_SUB_SUB_CATEGORIES(state, value) {
         state.subsubcategories = value;
+    },
+    SET_QUICK_ADVERTISEMENTS(state, value) {
+        state.quickadvertisements = value;
     },
     SET_ADVERTISEMENTS(state, value) {
         state.advertisements = value;

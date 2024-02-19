@@ -4,9 +4,18 @@
     <div class="list-group list-group-flush">
       <router-link
         class="list-group-item list-group-item-action list-group-item-light p-3"
-        to="dashboard"
+        to="/"
       >
-        <span class="badge bg-success" @click="toggleSidebar">
+        <span class="badge bg-success">
+          <GlobeAltIcon class="hero-icon"></GlobeAltIcon>
+        </span>
+        Home
+      </router-link>
+      <router-link
+        class="list-group-item list-group-item-action list-group-item-light p-3"
+        to="/dashboard"
+      >
+        <span class="badge bg-success">
           <TableCellsIcon class="hero-icon"></TableCellsIcon>
         </span>
         Dashboard
@@ -60,8 +69,9 @@
   </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import {
+  GlobeAltIcon,
   TableCellsIcon,
   UserGroupIcon,
   MegaphoneIcon,
@@ -71,6 +81,7 @@ import {
 } from "@heroicons/vue/24/outline";
 export default {
   components: {
+    GlobeAltIcon,
     TableCellsIcon,
     UserGroupIcon,
     MegaphoneIcon,

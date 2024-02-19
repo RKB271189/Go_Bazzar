@@ -27,18 +27,46 @@ class BazzarController extends Controller
     public function home()
     {
         try {
+            $subCategories = $this->subCategory->getCollection();
             $advertisements = $this->advertisement->getCollection(8);
             $advertisements = AdvertisementResource::collection($advertisements);
-            return response()->json(['advertisements' => $advertisements], 200);
+            $quickAdvertisements = [
+                [
+                    'name' => 'Real Estate',
+                    'image' => '/images/real-estate.jpeg',
+                    'link' => '/advertisement/list/realestate-9',
+                ],
+                [
+                    'name' => 'Electronics',
+                    'image' => '/images/electronics.webp',
+                    'link' => '/advertisement/list/electronics-1',
+                ],
+                [
+                    'name' => 'Care',
+                    'image' => '/images/care.jpg',
+                    'link' => '/advertisement/list/personalcare-12',
+                ],
+                [
+                    'name' => 'Auto',
+                    'image' => '/images/auto.jpg',
+                    'link' => '/advertisement/list/auto-2',
+                ],
+            ];
+            return response()->json(['subcategories' => $subCategories, 'advertisements' => $advertisements, 'quickadvertisements' => $quickAdvertisements], 200);
         } catch (Exception $ex) {
             Log::channel('bazzar_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function advertise()
+    public function advertise($slug = null)
     {
         try {
-            $advertisements = $this->advertisement->getCollection();
+            if (!$slug) {
+                $advertisements = $this->advertisement->getCollection();
+            } else {
+                $subCategoryId = strtok($slug, '-');
+                $advertisements = $this->advertisement->getCollectionByCategoryId($subCategoryId);
+            }
             $adCategories = $this->subCategory->getSubCategoryByMainId(1);
             $advertisements = AdvertisementResource::collection($advertisements);
             return response()->json(['subcategories' => $adCategories, 'advertisements' => $advertisements], 200);
@@ -51,10 +79,10 @@ class BazzarController extends Controller
     {
         try {
             $services = $this->service->getCollection();
-            $business = $this->business->getCollection();
-            $serviceCategories = $this->subCategory->getSubCategoryByMainId(3);
+            // $business = $this->business->getCollection();
+            // $serviceCategories = $this->subCategory->getSubCategoryByMainId(3);
             $services = ServiceResource::collection($services);
-            return response()->json(['subcategories' => $serviceCategories, 'services' => $services, 'business' => $business], 200);
+            return response()->json(['services' => $services], 200);
         } catch (Exception $ex) {
             Log::channel('bazzar_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);

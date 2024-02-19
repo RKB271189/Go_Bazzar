@@ -3,7 +3,11 @@
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
     <template v-slot:advertise-nav>
-      <AdvertiseNav :mainname="'Free Ads'" :subcategories="subcategories" />
+      <AdvertiseNav
+        :mainname="'Free Ads'"
+        :subcategories="freeAds"
+        :linktype="'advertisement'"
+      />
     </template>
     <template v-slot:page-content>
       <Title :heading="'Our Market Place'" />
@@ -40,7 +44,10 @@ export default {
     const store = useStore();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
-    const subcategories = computed(() => store.getters["Bazzar/subcategories"]);
+    const subcategories = computed(() => store.state.Bazzar.subcategories);
+    const freeAds = computed(() => {
+      return subcategories.value.filter((val) => val.category_id === 1);
+    });
     const advertisements = computed(
       () => store.getters["Bazzar/advertisements"]
     );
@@ -58,7 +65,7 @@ export default {
       showToast,
       message,
       hasError,
-      subcategories,
+      freeAds,
       advertisements,
       viewDetail,
     };

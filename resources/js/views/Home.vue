@@ -3,13 +3,19 @@
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
     <template v-slot:page-content>
-      <Title :heading="'Discover more good finds'" />
+      <Title :heading="'Our Market Place'" :viewmore="false" :linkto="null" />
+      <div class="row">
+        <Thumbnail :quickadveritsements="quickadvertisements" />
+      </div>
+      <Title
+        :heading="'Discover more good finds'"
+        :viewmore="true"
+        :linkto="'/advertisement/list'"
+      />
       <AdvertiseCard
         :advertisements="advertisements"
         @advertiseDetail="viewDetail"
       />
-      <Title :heading="'Our Market Place'" />
-      <Thumbnail />
     </template>
   </Layout>
 </template>
@@ -42,6 +48,9 @@ export default {
     const advertisements = computed(
       () => store.getters["Bazzar/advertisements"]
     );
+    const quickadvertisements = computed(
+      () => store.getters["Bazzar/quickadvertisements"]
+    );
     onMounted(() => {
       fetchHomeDetails();
     });
@@ -57,6 +66,7 @@ export default {
       message,
       hasError,
       advertisements,
+      quickadvertisements,
       viewDetail,
     };
   },
