@@ -26,27 +26,31 @@
         :viewmore="true"
         :linkto="'/service/list'"
       ></Title>
-      <ServiceCard
-        v-if="services.length > 0"
-        :services="services"
-      ></ServiceCard>
-      <Warning
-        v-else
-        :message="'Oops.. No services has been registered'"
-      ></Warning>
+      <div class="row">
+        <ServiceCard
+          v-if="services.length > 0"
+          :services="services"
+        ></ServiceCard>
+        <Warning
+          v-else
+          :message="'Oops.. No services has been registered'"
+        ></Warning>
+      </div>
       <Title
         :heading="'Businesses Available to community'"
         :viewmore="true"
         :linkto="'/business/list'"
       ></Title>
-      <DirectoryCard
-        v-if="businesses.length > 0"
-        :business="businesses"
-      ></DirectoryCard>
-      <Warning
-        v-else
-        :message="'Oops.. No businesses has been registered'"
-      ></Warning>
+      <div class="row">
+        <DirectoryCard
+          v-if="businesses.length > 0"
+          :business="businesses"
+        ></DirectoryCard>
+        <Warning
+          v-else
+          :message="'Oops.. No businesses has been registered'"
+        ></Warning>
+      </div>
     </template>
   </Layout>
 </template>
