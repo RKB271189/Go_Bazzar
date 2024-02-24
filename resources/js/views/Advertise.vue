@@ -3,14 +3,14 @@
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
     <template v-slot:page-content>
-      <AdvertiseDetail :advertisement="advertisement" />
+      <AdvertiseDetail :module="'Bazzar'" />
     </template>
   </Layout>
 </template>
 
 <script>
-import { ref, onMounted, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Layout from "../components/user/Layout.vue";
 import Loader from "../components/Loader.vue";
@@ -25,14 +25,12 @@ export default {
     AdvertiseDetail,
   },
   setup() {
-    const router = useRouter();
     const store = useStore();
     const route = useRoute();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
-    const advertisement = computed(() => store.getters["Bazzar/advertisement"]);
-    onMounted(() => {
-      fetchAdvertisementDetails();
+    onMounted(async () => {
+      await fetchAdvertisementDetails();
     });
     const fetchAdvertisementDetails = async () => {
       const params = {
@@ -49,7 +47,6 @@ export default {
       showToast,
       message,
       hasError,
-      advertisement,
     };
   },
 };

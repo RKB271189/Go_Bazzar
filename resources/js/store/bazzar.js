@@ -8,7 +8,9 @@ function initialState() {
         advertisements: {},
         advertisement: {},
         services: {},
-        businesses: {}
+        businesses: {},
+        newspapers: {},
+        others: {}
     }
 }
 const getters = {
@@ -19,7 +21,9 @@ const getters = {
     advertisements: state => state.advertisements,
     advertisement: state => state.advertisement,
     services: state => state.services,
-    businesses: state => state.businesses
+    businesses: state => state.businesses,
+    newspapers: state => state.newspapers,
+    others: state => state.others
 }
 const actions = {
     async FETCH_HOME_DETAILS({ commit }) {
@@ -109,6 +113,12 @@ const mutations = {
     },
     SET_BUSINESSES(state, value) {
         state.businesses = value;
+    },
+    SET_NEWSPAPERS(state, value) {
+        state.newspapers = value;
+    },
+    SET_OTHERS(state, value) {
+        state.others = value;
     }
 }
 export default {

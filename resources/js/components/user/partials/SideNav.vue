@@ -48,7 +48,9 @@
         <NewspaperIcon class="hero-icon"></NewspaperIcon>
       </div>
       <div>
-        <span class="m-0 d-block nav-link-sidebar">News Paper</span>
+        <router-link :to="'/newspaper/list'" class="text-decoration-none">
+          <span class="m-0 d-block nav-link-sidebar">News Paper</span>
+        </router-link>
         <span class="m-0 d-block quick-link-content"
           >Hindi, Gujarati and more</span
         >
@@ -70,7 +72,9 @@
         <SparklesIcon class="hero-icon"></SparklesIcon>
       </div>
       <div>
-        <span class="m-0 d-block nav-link-sidebar">Others</span>
+        <router-link :to="'/other/list'" class="text-decoration-none">
+          <span class="m-0 d-block nav-link-sidebar">Others</span>
+        </router-link>
         <span class="m-0 d-block quick-link-content"
           >Health, Education and more</span
         >

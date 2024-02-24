@@ -28,6 +28,8 @@ Route::get('/home', [BazzarController::class, 'home']);
 Route::get('/advertise/{slug?}', [BazzarController::class, 'advertise']);
 Route::get('/service', [BazzarController::class, 'service']);
 Route::get('/business', [BazzarController::class, 'business']);
+Route::get('/other', [BazzarController::class, 'other']);
+Route::get('/newspaper', [BazzarController::class, 'newspaper']);
 Route::get('/fetch/advertise/{id}', [UserController::class, 'singleAdvertisement']);
 Route::get('/fetch/service/{id}', [UserController::class, 'singleService']);
 Route::get('/fetch/business/{id}', [UserController::class, 'singleBusiness']);

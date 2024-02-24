@@ -7,6 +7,7 @@
         :mainname="'Free Ads'"
         :subcategories="freeAds"
         :linktype="'advertisement'"
+        @changeCategoryType="selectAdType"
       />
     </template>
     <template v-slot:page-content>
@@ -40,6 +41,7 @@ export default {
     Title,
   },
   setup() {
+    const isAdPage = ref(true);
     const router = useRouter();
     const store = useStore();
     const { hasError, message, loading, showToast, handleAPIRequest } =
@@ -60,7 +62,11 @@ export default {
     const viewDetail = (id) => {
       router.push("/advertisement/" + id);
     };
+    const selectAdType = () => {
+      fetchAdvertiseDetails();
+    };
     return {
+      isAdPage,
       loading,
       showToast,
       message,
@@ -68,6 +74,7 @@ export default {
       freeAds,
       advertisements,
       viewDetail,
+      selectAdType,
     };
   },
 };

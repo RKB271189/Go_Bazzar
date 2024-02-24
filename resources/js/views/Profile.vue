@@ -106,6 +106,7 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-10"></div>
         <div class="col-md-2">
           <div class="d-grid my-3">
             <button
@@ -123,7 +124,7 @@
 </template>
 
 <script>
-import Layout from "../components/user/account/Layout.vue";
+import Layout from "../components/user/Layout.vue";
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import Loader from "../components/Loader.vue";

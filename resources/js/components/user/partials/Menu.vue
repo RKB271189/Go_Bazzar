@@ -32,10 +32,16 @@
             <ul class="dropdown-menu">
               <li v-for="val in freeAds" :key="val.id">
                 <router-link
+                  v-if="!isAdPage"
                   class="dropdown-item"
                   :to="'/advertisement/list/' + val.name + '-' + val.id"
                   >{{ val.name }}</router-link
                 >
+                <a
+                  class="dropdown-item"
+                  v-else
+                  @click="$emit('changeCategoryType')"
+                ></a>
               </li>
             </ul>
           </li>
@@ -133,6 +139,11 @@
               <li>
                 <router-link class="dropdown-item" to="/profile"
                   >Profile</router-link
+                >
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/dashboard"
+                  >Dashboard</router-link
                 >
               </li>
               <li>

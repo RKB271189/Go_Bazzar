@@ -30,7 +30,10 @@
                 data-bs-target="#imageModal"
                 @click="openImage(advertisement.image[index].image, index)"
               />
-              <div v-if="index === 2 && advertisement.image[index].image !== null" class="image-overlay">
+              <div
+                v-if="index === 2 && advertisement.image[index].image !== null"
+                class="image-overlay"
+              >
                 <p>More Images</p>
               </div>
             </div>
@@ -160,24 +163,27 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 export default {
-  setup() {
+  props: {
+    module: String,
+  },
+  setup(props) {
     const store = useStore();
+    const advertisement = computed(
+      () => store.getters[props.module + "/advertisement"]
+    );
     const modalImages = ref("");
     const imageIndex = ref("");
     const openImage = (image, index) => {
       modalImages.value = image;
       imageIndex.value = index;
     };
-    const advertisement = computed(() => store.getters["Bazzar/advertisement"]);
-    const objImageLength = ref(0);
-    //objImageLength.value = advertisement.value.image.length;
     const nextImage = () => {
       if (
         imageIndex.value >= -1 &&
-        imageIndex.value < Object.keys(advertisement.value.image).length - 1
+        imageIndex.value < Object.keys(advertisement.image).length - 1
       ) {
         imageIndex.value = imageIndex.value + 1;
-        modalImages.value = advertisement.value.image[imageIndex.value].image;
+        modalImages.value = advertisement.image[imageIndex.value].image;
       }
     };
     const previousImage = () => {
@@ -194,7 +200,6 @@ export default {
       modalImages,
       imageIndex,
       advertisement,
-      objImageLength,
       openImage,
       nextImage,
       previousImage,

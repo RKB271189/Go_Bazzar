@@ -4,6 +4,8 @@ import AdvertisementList from '../views/AdvertiseList.vue';
 import Advertisement from '../views/Advertise.vue';
 import ServiceList from '../views/Service.vue';
 import BusinessList from '../views/Directory.vue';
+import OtherList from '../views/Other.vue';
+import NewsPaperList from '../views/NewsPaper.vue';
 import Directory from '../views/Directory.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
@@ -42,6 +44,16 @@ const routes = [
         path: '/business/list/:slug?',
         name: 'BusinessList',
         component: BusinessList,
+    },
+    {
+        path: '/other/list/:slug?',
+        name: 'OtherList',
+        component: OtherList,
+    },
+    {
+        path: '/newspaper/list/:slug?',
+        name: 'NewsPaperList',
+        component: NewsPaperList,
     },
     {
         path: '/directory',

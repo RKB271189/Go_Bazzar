@@ -105,4 +105,24 @@ class BazzarController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
+    public function other()
+    {
+        try {
+            $others = [];
+            return response()->json(['others' => $others,], 200);
+        } catch (Exception $ex) {
+            Log::channel('bazzar_exception_log')->error($ex->getMessage());
+            return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
+        }
+    }
+    public function newspaper()
+    {
+        try {
+            $newspapers = [];
+            return response()->json(['newspapers' => $newspapers,], 200);
+        } catch (Exception $ex) {
+            Log::channel('bazzar_exception_log')->error($ex->getMessage());
+            return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
+        }
+    }
 }

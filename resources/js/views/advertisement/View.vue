@@ -17,15 +17,15 @@
           </router-link>
         </div>
       </div>
-      <AdvertiseDetail :advertisement="advertisement" />
+      <AdvertiseDetail :module="'User'" />
     </template>
   </Layout>
 </template>
 
 <script>
 import Layout from "../../components/user/account/Layout.vue";
-import { ref, onMounted, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Loader from "../../components/Loader.vue";
 import Toast from "../../components/Toast.vue";
@@ -44,7 +44,6 @@ export default {
     const { status, hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
     const id = route.params.id;
-    const advertisement = computed(() => store.getters["User/advertisement"]);
     onMounted(async () => {
       await fetchAdvertiseRequires();
     });
@@ -59,7 +58,6 @@ export default {
       message,
       hasError,
       id,
-      advertisement,
     };
   },
 };
