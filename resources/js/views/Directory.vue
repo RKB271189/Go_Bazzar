@@ -7,11 +7,13 @@
     </template>
     <template v-slot:page-content>
       <Title :heading="'Discover more good finds'"></Title>
-      <DirectoryCard v-if="business.length > 0" :business="business" />
-      <Warning
-        v-else
-        :message="'Oops.. No businesses has been registered'"
-      ></Warning>
+      <div class="row">
+        <DirectoryCard v-if="business.length > 0" :business="business" />
+        <Warning
+          v-else
+          :message="'Oops.. No businesses has been registered'"
+        ></Warning>
+      </div>
     </template>
   </Layout>
 </template>

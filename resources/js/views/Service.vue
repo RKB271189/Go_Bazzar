@@ -11,14 +11,16 @@
     </template>
     <template v-slot:page-content>
       <Title :heading="'Discover more good finds'"></Title>
-      <ServiceCard
-        v-if="services.length > 0"
-        :services="services"
-      ></ServiceCard>
-      <Warning
-        v-else
-        :message="'Oops.. No services has been registered'"
-      ></Warning>
+      <div class="row">
+        <ServiceCard
+          v-if="services.length > 0"
+          :services="services"
+        ></ServiceCard>
+        <Warning
+          v-else
+          :message="'Oops.. No services has been registered'"
+        ></Warning>
+      </div>
     </template>
   </Layout>
 </template>
