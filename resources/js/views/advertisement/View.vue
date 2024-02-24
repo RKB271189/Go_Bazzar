@@ -2,6 +2,9 @@
   <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
+    <template v-slot:menu-content>
+      <SideNav />
+    </template>
     <template v-slot:page-content>
       <div class="row">
         <div class="col-md-10">
@@ -23,7 +26,8 @@
 </template>
 
 <script>
-import Layout from "../../components/user/account/Layout.vue";
+import Layout from "../../components/user/Layout.vue";
+import SideNav from "../../components/user/account/SideNav.vue";
 import { onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -36,6 +40,7 @@ export default {
     Loader,
     Toast,
     Layout,
+    SideNav,
     AdvertiseDetail,
   },
   setup() {

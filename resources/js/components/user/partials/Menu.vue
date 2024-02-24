@@ -136,14 +136,24 @@
               Account
             </a>
             <ul class="dropdown-menu">
+              <!-- <li>
+                <router-link class="dropdown-item" to="/dashboard"
+                  >Dashboard</router-link
+                >
+              </li> -->
               <li>
                 <router-link class="dropdown-item" to="/profile"
                   >Profile</router-link
                 >
               </li>
               <li>
-                <router-link class="dropdown-item" to="/dashboard"
-                  >Dashboard</router-link
+                <router-link class="dropdown-item" to="/advertise"
+                  >Advertise</router-link
+                >
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/list/other"
+                  >Others</router-link
                 >
               </li>
               <li>

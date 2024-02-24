@@ -2,6 +2,9 @@
   <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
+    <template v-slot:menu-content>
+      <SideNav />
+    </template>
     <template v-slot:page-content>
       <h4 class="mt-4">Create/Update Your Profile</h4>
       <div class="row">
@@ -125,6 +128,7 @@
 
 <script>
 import Layout from "../components/user/Layout.vue";
+import SideNav from "../components/user/account/SideNav.vue";
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import Loader from "../components/Loader.vue";
@@ -135,6 +139,7 @@ export default {
     Loader,
     Toast,
     Layout,
+    SideNav,
   },
   setup() {
     const store = useStore();

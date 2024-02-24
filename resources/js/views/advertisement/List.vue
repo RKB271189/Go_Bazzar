@@ -2,6 +2,9 @@
   <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
+    <template v-slot:menu-content>
+      <SideNav />
+    </template>
     <template v-slot:page-content>
       <h4 class="mt-4">Your Advertisement Here</h4>
       <div class="row">
@@ -29,7 +32,8 @@
 </template>
     
     <script>
-import Layout from "../../components/user/account/Layout.vue";
+import Layout from "../../components/user/Layout.vue";
+import SideNav from "../../components/user/account/SideNav.vue";
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -43,6 +47,7 @@ export default {
     Loader,
     Toast,
     Layout,
+    SideNav,
     Warning,
     AdvertiseCard,
   },
