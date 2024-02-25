@@ -180,10 +180,10 @@ export default {
     const nextImage = () => {
       if (
         imageIndex.value >= -1 &&
-        imageIndex.value < Object.keys(advertisement.image).length - 1
+        imageIndex.value < Object.keys(advertisement.value.image).length - 1
       ) {
         imageIndex.value = imageIndex.value + 1;
-        modalImages.value = advertisement.image[imageIndex.value].image;
+        modalImages.value = advertisement.value.image[imageIndex.value].image;
       }
     };
     const previousImage = () => {

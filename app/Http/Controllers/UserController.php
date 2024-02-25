@@ -102,6 +102,8 @@ class UserController extends Controller
             if ($id) {
                 $advertisement = $this->advertisement->getCollectionById($id);
                 $advertisement = new AdvertisementResource($advertisement);
+            } elseif ($id == 0 && !Auth::check()) {
+                return response()->json(['error' => 'Please login!! to post the advertisement.'], 401);
             }
             return response()->json(['province' => $province, 'ad_categories' => $adCategories, 'advertisement' => $advertisement], 200);
         } catch (Exception $ex) {

@@ -29,10 +29,13 @@
           <div class="col-lg-3 col-md-3 mt-3 mt-md-0"></div>
           <div class="col-lg-1 col-md-1 mt-3 mt-md-0">
             <div class="row">
-              <button class="btn btn-warning top-nav-buttons">
+              <router-link
+                class="btn btn-warning top-nav-buttons"
+                :to="{ name: 'CreateAdvertise', params: { id: 0 } }"
+              >
                 <MicrophoneIcon class="hero-icon float-start"></MicrophoneIcon>
                 Post Ads
-              </button>
+              </router-link>
             </div>
             <div class="row mt-1">
               <button class="btn btn-danger top-nav-buttons">
