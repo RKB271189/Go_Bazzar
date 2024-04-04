@@ -18,7 +18,7 @@
             </router-link>
           </div>
         </div> -->
-        <div class="col-lg-3 col-6">
+        <!-- <div class="col-lg-3 col-6">
           <div class="small-box bg-success">
             <div class="inner">
               <h3>53<sup style="font-size: 20px">%</sup></h3>
@@ -34,7 +34,7 @@
               ></ArrowRightCircleIcon>
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
       <h4 class="mt-4">Your Advertisement Here</h4>
       <div class="row" v-if="Object.keys(advertisments).length > 0">

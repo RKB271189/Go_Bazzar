@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-6" v-for="val in business" :key="val.id">
     <div class="card p-2">
-      <div class="row">
+      <div class="row mt-2">
         <div class="col-md-4">
           <img :src="'/images/travel.jpg'" class="card-img-top" alt="..." />
         </div>
