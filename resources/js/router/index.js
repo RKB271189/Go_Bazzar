@@ -9,6 +9,7 @@ import NewsPaperList from '../views/NewsPaper.vue';
 import Directory from '../views/Directory.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
+import Forgot from '../views/Forgot.vue';
 import Contact from '../views/Contact.vue';
 import Service from '../views/Service.vue';
 import Dashboard from '../views/Dashboard.vue';
@@ -79,6 +80,11 @@ const routes = [
         path: '/signup',
         name: 'Signup',
         component: Signup,
+    },
+    {
+        path: '/forgot-password',
+        name: 'Forgot',
+        component: Forgot,
     },
     {
         path: '/dashboard',

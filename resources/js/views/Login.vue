@@ -65,8 +65,10 @@
                           Keep me logged in
                         </label>
                       </div>
-                      <a href="#!" class="link-primary text-decoration-none"
-                        >Forgot password?</a
+                      <router-link
+                        to="/forgot-password"
+                        class="link-primary text-decoration-none"
+                        >Forgot password?</router-link
                       >
                     </div>
                   </div>

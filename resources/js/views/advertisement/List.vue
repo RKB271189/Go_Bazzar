@@ -6,20 +6,37 @@
       <SideNav />
     </template>
     <template v-slot:page-content>
-      <h4 class="mt-4">Your Advertisement Here</h4>
       <div class="row">
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
           <div class="d-grid my-3 float-start">
             <router-link
               class="btn btn-success btn-block"
               type="button"
               :to="{ name: 'CreateAdvertise', params: { id: 0 } }"
             >
-              Create New
+              General
             </router-link>
+          </div>
+        </div> -->
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <StarIcon></StarIcon>
+            </div>
+            <a href="#" class="small-box-footer"
+              >More info
+              <ArrowRightCircleIcon
+                class="hero-icon-small"
+              ></ArrowRightCircleIcon>
+            </a>
           </div>
         </div>
       </div>
+      <h4 class="mt-4">Your Advertisement Here</h4>
       <div class="row" v-if="Object.keys(advertisments).length > 0">
         <AdvertiseCard
           :advertisements="advertisments"
@@ -42,6 +59,7 @@ import Toast from "../../components/Toast.vue";
 import useAPIRequest from "../../services/api-request";
 import Warning from "../../components/Warning.vue";
 import AdvertiseCard from "../../components/AdvertiseCard.vue";
+import { ArrowRightCircleIcon, StarIcon } from "@heroicons/vue/24/outline";
 export default {
   components: {
     Loader,
@@ -50,6 +68,8 @@ export default {
     SideNav,
     Warning,
     AdvertiseCard,
+    ArrowRightCircleIcon,
+    StarIcon,
   },
   setup() {
     const router = useRouter();

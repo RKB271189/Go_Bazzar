@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('/send/code', [AuthController::class, 'sendCode']);
 Route::post('/create/account', [AuthController::class, 'createAccount']);
+Route::post('/change/password', [AuthController::class, 'changePassword']);
 Route::post('/verify/account', [AuthController::class, 'verifyAccount']);
 Route::get('/home', [BazzarController::class, 'home']);
 Route::get('/advertise/{slug?}', [BazzarController::class, 'advertise']);

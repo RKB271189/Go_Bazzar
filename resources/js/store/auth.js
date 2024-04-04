@@ -44,6 +44,17 @@ const actions = {
             commit('SET_ERROR', error.response.data.error)
         }
     },
+    async USER_CHANGE_PASSWORD({ commit }, params) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            let res = await axios.post('/api/change/password', params)
+            if (res.status === 200) {
+                commit('SET_SUCCESS', res.data.message)
+            }
+        } catch (error) {
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
     async USER_LOGOUT({ commit }, params) {
         commit('RESET_RESPONSE_FLAG')
         try {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\Auth\ChangePassword;
 use App\Http\Requests\User\Auth\SendCodeRequest;
 use App\Http\Requests\User\Auth\UserCreateRequest;
 use App\Http\Requests\User\Auth\UserVerifyRequest;
@@ -58,13 +59,18 @@ class AuthController extends Controller
     public function sendCode(SendCodeRequest $request)
     {
         try {
-            $params = $request->only('email');
+            $params = $request->only('email', 'forgot');
             $code = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 5);
             $params['code'] = $code;
             if ($userCode = $this->userCode->validateEmail($params['email'])) {
                 $this->userCode->updateCollection($params, $userCode->id);
             } else {
                 $this->userCode->createCollection($params);
+            }
+            if (array_key_exists('forgot', $params)) {
+                if (!$this->user->validateEmail($params['email'])) {
+                    return response()->json(['error' => 'You are not registered user'], 401);
+                }
             }
             Log::channel('user_activity_log')->info('User with email :' . $params['email'] . ' trying to send code :' . $code);
             Mail::to($params['email'])->send(new SendCode($code));
@@ -198,6 +204,26 @@ class AuthController extends Controller
                 return response()->json(['token' => $token->plainTextToken, 'message' => 'You have logged in successfully'], 200);
             } else {
                 return response()->json(['error' => 'You have provided invalid credentials'], 401);
+            }
+        } catch (Exception $ex) {
+            Log::channel('user_exception_log')->error($ex->getMessage());
+            return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
+        }
+    }
+    public function changePassword(ChangePassword $request)
+    {
+        try {
+            $params = $request->only('email', 'code', 'password', 'confirmPassword');
+            if ($params['password'] !== $params['confirmPassword']) {
+                return response()->json(['error' => 'Password and confirm password does not match'], 422);
+            } else {
+                if (!($this->userCode->validateCode($params['email'], $params['code']))) {
+                    return response()->json(['error' => 'The code given is invalid'], 400);
+                } else {
+                    $user = $this->user->validateEmail($params['email']);
+                    $this->user->updateCollection(['password' => $params['password']], $user->id);
+                    return response()->json(['message' => 'Password updated successfully'], 200);
+                }
             }
         } catch (Exception $ex) {
             Log::channel('user_exception_log')->error($ex->getMessage());
