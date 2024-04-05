@@ -103,8 +103,34 @@
     </div>
   </div>
   <div class="row mt-2">
+    <div class="col-12" v-if="advertisement.extras">
+      <h5>Other Details</h5>
+      <div class="row" v-if="advertisement.extras.auto">
+        <p class="text-muted">
+          Model : <strong>{{ advertisement.extras.auto.model }}</strong>
+        </p>
+        <p class="text-muted">
+          Make : <strong>{{ advertisement.extras.auto.make }}</strong>
+        </p>
+        <p class="text-muted">
+          Year : <strong>{{ advertisement.extras.auto.year }}</strong>
+        </p>
+      </div>
+      <div class="row" v-if="advertisement.extras.rooms">
+        <p class="text-muted">
+          Room Type :
+          <strong>{{ advertisement.extras.rooms.room_type }}</strong>
+        </p>
+      </div>
+      <div class="row" v-if="advertisement.extras.estate">
+        <p class="text-muted">
+          House Type :
+          <strong>{{ advertisement.extras.estate.estate_type }}</strong>
+        </p>
+      </div>
+    </div>
     <div class="col-12">
-      <h5>Description :</h5>
+      <h5>Description</h5>
       <p class="text-muted">
         <strong>{{ advertisement.description }}</strong>
       </p>

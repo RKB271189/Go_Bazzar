@@ -7,6 +7,8 @@ function initialState() {
         profile: [],
         advertisements: {},
         advertisement: {},
+        rooms_category: [],
+        estates_category: [],
         sub_categories: [],
         sub_sub_categories: [],
         services: {},
@@ -22,6 +24,8 @@ const getters = {
     profile: state => state.profile,
     advertisements: state => state.advertisements,
     advertisement: state => state.advertisement,
+    rooms_category: state => state.rooms_category,
+    estates_category: state => state.estates_category,
     sub_categories: state => state.sub_categories,
     sub_sub_categories: state => state.sub_sub_categories,
     services: state => state.services,
@@ -76,6 +80,8 @@ const actions = {
                 commit('SET_PROVINCE', res.data.province);
                 commit('SET_SUB_CATEGORIES', res.data.ad_categories);
                 commit('SET_ADVERTISEMENT', res.data.advertisement);
+                commit('SET_ROOMS_CATEGORIES', res.data.rooms);
+                commit('SET_ESTATES_CATEGORIES', res.data.estate);
             }
         } catch (error) {
             commit('SET_STATUS', error.response.status);
@@ -210,6 +216,12 @@ const mutations = {
     },
     SET_ADVERTISEMENT(state, value) {
         state.advertisement = value;
+    },
+    SET_ROOMS_CATEGORIES(state, value) {
+        state.rooms_category = value;
+    },
+    SET_ESTATES_CATEGORIES(state, value) {
+        state.estates_category = value
     },
     SET_SUB_CATEGORIES(state, value) {
         state.sub_categories = value;

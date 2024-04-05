@@ -7,17 +7,17 @@
     </template>
     <template v-slot:page-content>
       <div class="row">
-        <!-- <div class="col-md-12">
+        <div class="col-md-12">
           <div class="d-grid my-3 float-start">
             <router-link
               class="btn btn-success btn-block"
               type="button"
               :to="{ name: 'CreateAdvertise', params: { id: 0 } }"
             >
-              General
+              Create
             </router-link>
           </div>
-        </div> -->
+        </div>
         <!-- <div class="col-lg-3 col-6">
           <div class="small-box bg-success">
             <div class="inner">

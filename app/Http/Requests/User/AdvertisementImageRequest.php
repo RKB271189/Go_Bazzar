@@ -30,15 +30,15 @@ class AdvertisementImageRequest extends FormRequest
     {
         return [
             'advertisement_id' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png'
+            'images' => 'required|mimes:jpeg,jpg,png'
         ];
     }
     public function messages(): array
     {
         return [
             'advertisement_id.required' => 'Something went wrong',
-            'image.required' => 'Please add the image',
-            'image.mimes' => 'Valid image type JPEG, JPG, PNG'
+            'images.required' => 'Please add the image',
+            'images.mimes' => 'Valid image type JPEG, JPG, PNG'
         ];
     }
     protected function failedValidation(Validator $validator)

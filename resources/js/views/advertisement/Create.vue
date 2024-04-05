@@ -32,7 +32,6 @@
                 name="expiry_date"
                 id="expiry_date"
                 autocomplete="off"
-                required
               />
               <label for="expiry_date" class="form-label">Expiry Date</label>
             </div>
@@ -129,6 +128,7 @@
                 name="sub_category_id"
                 type="text"
                 class="form-control"
+                @change="changeCategory"
               >
                 <option
                   value="0"
@@ -163,7 +163,92 @@
             </div>
           </div>
         </div>
+        <div class="row" v-if="auto">
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                v-model="auto_fields.model"
+                type="text"
+                class="form-control"
+                name="model"
+                id="model"
+                autocomplete="off"
+              />
+              <label for="model" class="form-label">Model</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                v-model="auto_fields.make"
+                type="text"
+                class="form-control"
+                name="make"
+                id="make"
+                autocomplete="off"
+              />
+              <label for="make" class="form-label">Make</label>
+            </div>
+          </div>
+        </div>
         <div class="row">
+          <div class="col-md-6" v-if="auto">
+            <div class="form-floating mb-3">
+              <input
+                v-model="auto_fields.year"
+                type="text"
+                class="form-control"
+                name="year"
+                id="year"
+                autocomplete="off"
+              />
+              <label for="year" class="form-label">Year</label>
+            </div>
+          </div>
+          <div class="col-md-6" v-if="rooms">
+            <div class="form-floating mb-3">
+              <select
+                v-model="rooms_value"
+                id="rooms"
+                name="rooms"
+                type="text"
+                class="form-control"
+              >
+                <option
+                  value=""
+                  :selected="rooms_value === '' ? 'selected' : ''"
+                >
+                  Select
+                </option>
+                <option v-for="val in rooms_category" :value="val" :key="val">
+                  {{ val }}
+                </option>
+              </select>
+              <label for="rooms" class="form-label">Room Category</label>
+            </div>
+          </div>
+          <div class="col-md-6" v-if="estate">
+            <div class="form-floating mb-3">
+              <select
+                v-model="estate_value"
+                id="estate"
+                name="estate"
+                type="text"
+                class="form-control"
+              >
+                <option
+                  value=""
+                  :selected="estate_value === '' ? 'selected' : ''"
+                >
+                  Select
+                </option>
+                <option v-for="val in estates_category" :value="val" :key="val">
+                  {{ val }}
+                </option>
+              </select>
+              <label for="estate" class="form-label">Estate Category</label>
+            </div>
+          </div>
           <div class="col-md-6">
             <div class="form-floating mb-3">
               <input
@@ -173,7 +258,6 @@
                 name="price"
                 id="price"
                 autocomplete="off"
-                required
               />
               <label for="price" class="form-label">Price</label>
             </div>
@@ -350,7 +434,21 @@ export default {
     const price = ref(0.0);
     const selected_thumb_nail = ref(null);
     const advertisement = computed(() => store.getters["User/advertisement"]);
+    const rooms_category = computed(() => store.getters["User/rooms_category"]);
+    const rooms_value = ref("");
+    const estates_category = computed(
+      () => store.getters["User/estates_category"]
+    );
+    const estate_value = ref("");
     const images = ref([null, null, null, null]);
+    const auto = ref(false);
+    const rooms = ref(false);
+    const estate = ref(false);
+    const auto_fields = ref({
+      model: "",
+      make: "",
+      year: "",
+    });
     onMounted(async () => {
       let id = route.params.id;
       await fetchAdvertiseRequires(id);
@@ -370,6 +468,21 @@ export default {
       city_id.value = advertisement.value.city_id;
       sub_category_id.value = advertisement.value.sub_category_id;
       price.value = advertisement.value.price;
+      if (advertisement.value.extras) {
+        if (advertisement.value.extras.auto) {
+          const auto_values = advertisement.value.extras.auto;
+          auto.value = true;
+          auto_fields.value.make = auto_values.make;
+          auto_fields.value.year = auto_values.year;
+          auto_fields.value.model = auto_values.model;
+        } else if (advertisement.value.extras.rooms) {
+          rooms.value = true;
+          rooms_value.value = advertisement.value.extras.rooms.room_type;
+        } else if (advertisement.value.extras.estate) {
+          estate.value = true;
+          estate_value.value = advertisement.value.extras.estate.estate_type;
+        }
+      }
       filterCity(province_id.value);
     };
     const changeProvince = (event) => {
@@ -381,6 +494,19 @@ export default {
         .filter((province) => province.id === province_id)
         .map((selectedProvince) => selectedProvince.city)
         .flat();
+    };
+    const changeCategory = (event) => {
+      const selectedCategoryId = event.target.value;
+      auto.value = false;
+      rooms.value = false;
+      estate.value = false;
+      if (selectedCategoryId == 2) {
+        auto.value = true;
+      } else if (selectedCategoryId == 11) {
+        rooms.value = true;
+      } else if (selectedCategoryId == 9) {
+        estate.value = true;
+      }
     };
     const browseImage = () => {
       selected_thumb_nail.value = thumb_nail.value.files[0];
@@ -401,6 +527,23 @@ export default {
         price: price.value,
         thumb_nail: selected_thumb_nail.value,
       };
+      if (auto.value == true) {
+        params.extras = {
+          auto: {
+            model: auto_fields.value.model,
+            make: auto_fields.value.make,
+            year: auto_fields.value.year,
+          },
+        };
+      } else if (rooms.value == true) {
+        params.extras = {
+          rooms: { room_type: rooms_value.value },
+        };
+      } else if (estate.value == true) {
+        params.extras = {
+          estate: { estate_type: estate_value.value },
+        };
+      }
       await handleAPIRequest("User", "User/USER_CREATE_ADVERTISEMENT", params);
       if (!hasError.value) {
         router.push("/create/advertise/" + advertisement.value.id);
@@ -437,9 +580,18 @@ export default {
       sub_category_id,
       sub_category,
       price,
+      auto,
+      rooms,
+      estate,
+      auto_fields,
       thumb_nail,
       advertisement,
+      rooms_category,
+      rooms_value,
+      estates_category,
+      estate_value,
       changeProvince,
+      changeCategory,
       browseImage,
       userSaveAdvertise,
       browseOtherImage,

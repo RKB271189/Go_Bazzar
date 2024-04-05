@@ -32,11 +32,9 @@ class AdvertisementRequest extends FormRequest
             'province_id' => 'required',
             'city_id' => 'required',
             'title' => 'required',
-            'description' => 'required',
-            'expiry_date' => 'required',
+            'description' => 'required',            
             'address' => 'required',
-            'thumb_nail' => 'sometimes|mimes:jpeg,jpg,png',
-            'price' => 'required',
+            'thumb_nail' => 'sometimes|mimes:jpeg,jpg,png',            
         ];
     }
     public function messages(): array
@@ -45,8 +43,7 @@ class AdvertisementRequest extends FormRequest
             'province_id.required' => 'Please select the province',
             'city_id.required' => 'Please select the city',
             'title.required' => 'Please provide the title',
-            'description.required' => 'Please provide the description',
-            'expiry_date.required' => 'Please provide the expiry date',
+            'description.required' => 'Please provide the description',          
             'address.required' => 'Please provide the address',
             'thumb_nail.required' => 'Please add the image',
             'thumb_nail.mimes' => 'Valid image type JPEG, JPG, PNG'

@@ -34,6 +34,7 @@ class AdvertisementResource extends JsonResource
             'is_sold' => $this->is_sold,
             'urgent' => false,
             'price' => $this->price,
+            'extras' => json_decode($this->extras, true),
             'created_at' => date('d-m-Y', strtotime($this->created_at))
         ];
         if ($this->relationLoaded('image')) {

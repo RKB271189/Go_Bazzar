@@ -105,7 +105,17 @@ class UserController extends Controller
             } elseif ($id == 0 && Auth::check()) {
                 return response()->json(['error' => 'Please login!! to post the advertisement.'], 401);
             }
-            return response()->json(['province' => $province, 'ad_categories' => $adCategories, 'advertisement' => $advertisement], 200);
+            $roomsCategory = [
+                'Rental',
+                'Shared room',
+                'Lease Transfer'
+            ];
+            $estateCategory = [
+                'Condo',
+                'Single House',
+                'Town House'
+            ];
+            return response()->json(['province' => $province, 'rooms' => $roomsCategory, 'estate' => $estateCategory, 'ad_categories' => $adCategories, 'advertisement' => $advertisement], 200);
         } catch (Exception $ex) {
             Log::channel('user_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
@@ -116,8 +126,9 @@ class UserController extends Controller
         try {
             $user = Auth::user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
-            $params = $request->only('id', 'province_id', 'city_id', 'title', 'description', 'expiry_date', 'address', 'sub_category_id', 'price');
+            $params = $request->only('id', 'province_id', 'city_id', 'title', 'description', 'expiry_date', 'address', 'sub_category_id', 'price', 'extras');
             $params['profile_id'] = $userProfile->id;
+            $params['extras'] = json_encode($params['extras']);
             if (empty($params['id']) || $params['id'] == null) {
                 unset($params['id']);
                 $advertisement = $this->advertisement->createCollection($params);
@@ -146,7 +157,7 @@ class UserController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function uploadAdvertisementImage(AdvertisementImageRequest $request)
+    public function uploadAdvertisementImage(Request $request)
     {
         try {
             $user = Auth::user();

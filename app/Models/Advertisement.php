@@ -22,6 +22,7 @@ class Advertisement extends Model
         'expiry_date',
         'address',
         'price',
+        'extras',
         'is_available',
         'is_sold',
         'is_approved'
