@@ -44,6 +44,25 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'from' => [
+                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+                'name' => env('MAIL_FROM_NAME', 'Example'),
+            ],
+        ],
+        'portfolio' => [
+            'transport' => 'smtp',
+            // 'url' => env('MAIL_URL'),
+            'host' => env('RAHUL_MAIL_HOST', 'smtp.mailgun.org'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('RAHUL_MAIL_USERNAME'),
+            'password' => env('RAHUL_MAIL_PASSWORD'),
+            'timeout' => null,
+            //'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'from' => [
+                'address' => env('RAHUL_MAIL_FROM_ADDRESS', 'hello@example.com'),
+                'name' => env('RAHUL_MAIL_FROM_NAME', 'Example'),
+            ],
         ],
 
         'ses' => [
@@ -107,10 +126,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
+    // 'from' => [
+    //     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    //     'name' => env('MAIL_FROM_NAME', 'Example'),
+    // ],
 
     /*
     |--------------------------------------------------------------------------

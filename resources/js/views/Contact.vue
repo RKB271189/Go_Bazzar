@@ -14,7 +14,7 @@
             help you.
           </p>
           <div class="row">
-            <div class="col-md-9 mb-md-0 mb-5">
+            <!-- <div class="col-md-9 mb-md-0 mb-5">
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
@@ -71,22 +71,30 @@
                   <a class="btn btn-primary btn-lg float-end">Send</a>
                 </div>
               </div>
-            </div>
-            <div class="col-md-3 text-center">
+            </div> -->
+            <div class="col-md-4 text-center">
               <ul class="list-unstyled mb-0">
                 <li>
-                  <MapPinIcon class="mt-0 hero-icon"></MapPinIcon>
+                  <MapPinIcon class="mt-4 hero-icon"></MapPinIcon>
                   <p>2830 Gordon Road, Regina, SK</p>
                 </li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center">
+              <ul class="list-unstyled mb-0">
                 <li>
                   <PhoneIcon class="mt-4 hero-icon"></PhoneIcon>
                   <p>+ 306 510 7099</p>
                 </li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center">
+              <ul class="list-unstyled mb-0">
                 <li>
                   <EnvelopeIcon class="mt-4 hero-icon"></EnvelopeIcon>
                   <p>info@gobazzar.com</p>
                 </li>
-              </ul>
+              </ul>              
             </div>
           </div>
         </section>

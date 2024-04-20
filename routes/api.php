@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BazzarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/create/business', [UserController::class, 'createBusiness']);
 });
 Route::post('logout', [AuthController::class, 'logout']);
+
+//Miscellaneous routes
+Route::middleware(['validate.miscellaneous'])->group(function () {
+    Route::post('/send/email', [MiscellaneousController::class, 'sendEmail']);
+});
