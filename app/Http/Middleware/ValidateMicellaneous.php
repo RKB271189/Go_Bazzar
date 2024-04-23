@@ -16,7 +16,7 @@ class ValidateMicellaneous
     public function handle(Request $request, Closure $next): Response
     {
         $token = $request->token;
-        if ($token === '3a2fd5c783854a0c1e50f377337298e2') {
+        if ($token === config('miscellaneous.misc')) {
             return $next($request);
         }
         return response()->json(['error' => 'Invalid token provided'], 401);

@@ -30,6 +30,10 @@ class Miscellaneous extends Mailable
             return new Envelope(
                 subject: 'Contact from portfolio',
             );
+        } elseif ($this->tag === 'thanking') {
+            return new Envelope(
+                subject: 'Thanks for contacting',
+            );
         }
     }
 
@@ -41,6 +45,10 @@ class Miscellaneous extends Mailable
         if ($this->tag === 'my-portfolio') {
             return new Content(
                 view: 'emails.my-portfolio',
+            );
+        } elseif ($this->tag === 'thanking') {
+            return new Content(
+                view: 'emails.thanking-portfolio',
             );
         }
     }

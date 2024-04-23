@@ -19,6 +19,7 @@ class MiscellaneousController extends Controller
             unset($params['tag']);
             if ($tag === 'my-portfolio') {
                 Mail::mailer('portfolio')->to('rahul.baraiya05@gmail.com')->send(new Miscellaneous($tag, $params));
+                Mail::mailer('portfolio')->to($params['email'])->send(new Miscellaneous('thanking', $params));
             } else {
             }
             return response()->json(['message' => 'Message sent successfully'], 200);
