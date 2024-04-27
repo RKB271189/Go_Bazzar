@@ -1,14 +1,14 @@
-export const commonInitialState = {
+const commonInitialState = {
     hasError: false,
     message: null,
     status: null
 }
-export const commonGetters = {
+const commonGetters = {
     hasError: state => state.hasError,
     message: state => state.message,
     status: state => state.status
 };
-export const commonMutations = {
+const commonMutations = {
     RESET_RESPONSE_FLAG(state) {
         state.hasError = false;
         state.message = null;
@@ -25,3 +25,8 @@ export const commonMutations = {
         state.status = value;
     }
 };
+export {
+    commonInitialState,
+    commonGetters,
+    commonMutations
+}

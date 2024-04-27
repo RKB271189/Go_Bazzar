@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { useStore } from "vuex";
-function useAPIRequest() {
+const useAPIRequest = () => {
     const status = ref(null);
     const hasError = ref(false);
     const message = ref("");

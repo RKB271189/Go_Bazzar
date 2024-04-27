@@ -204,6 +204,9 @@ export default {
       return subcategories.value.filter((val) => val.category_id === 5);
     });
     onMounted(() => {
+      if (Object.keys(subcategories.value).length === 0) {
+        fetchMenu();
+      }
       showAccount();
     });
     const showAccount = () => {
@@ -212,6 +215,9 @@ export default {
       } else {
         isLoggedIn.value = false;
       }
+    };
+    const fetchMenu = async () => {
+      await handleAPIRequest("Bazzar", "Bazzar/FETCH_MENU_ITEMS");
     };
     const userLogout = async () => {
       await handleAPIRequest("Auth", "Auth/USER_LOGOUT");

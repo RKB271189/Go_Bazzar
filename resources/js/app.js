@@ -7,14 +7,14 @@ import { createApp } from 'vue';
 
 import App from '../../resources/js/views/App.vue';
 
-import router from './router';
 import store from './store';
+import router from './router';
 import setupAxiosInterceptors from './services/axios-interceptor';
 const app = createApp(App);
-app.use(router);
 app.use(store);
+app.use(router);
 app.use(Toast);
-router.beforeEach((to, from, next) => {    
+router.beforeEach((to, from, next) => {
     setupAxiosInterceptors(store);
     next();
 });

@@ -39,11 +39,11 @@ class UserController extends Controller
         private Business $business,
     ) {
     }
-    public function fetchProfile()
+    public function fetchProfile(Request $request)
     {
         try {
+            $user = $request->user();
             $province = $this->province->getCollection();
-            $user = Auth::user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             if ($userProfile) {
                 $userProfile = new ProfileResource($userProfile);
@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         try {
             $params = $request->only('first_name', 'last_name', 'province_id', 'city_id', 'postal_code', 'contact_no');
-            $user = Auth::user();
+            $user = $request->user();
             $params['user_id'] = $user->id;
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             if ($userProfile) {
@@ -77,10 +77,10 @@ class UserController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function advertisment()
+    public function advertisment(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             if (!$userProfile) {
                 return response()->json(['error' => 'Please complete your profile first.'], 422);
@@ -102,7 +102,7 @@ class UserController extends Controller
             if ($id) {
                 $advertisement = $this->advertisement->getCollectionById($id);
                 $advertisement = new AdvertisementResource($advertisement);
-            } elseif ($id == 0 && Auth::check()) {
+            } elseif ($id == 0 && !auth('sanctum')->check()) {
                 return response()->json(['error' => 'Please login!! to post the advertisement.'], 401);
             }
             $roomsCategory = [
@@ -124,7 +124,7 @@ class UserController extends Controller
     public function createAdvertisement(AdvertisementRequest $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             $params = $request->only('id', 'province_id', 'city_id', 'title', 'description', 'expiry_date', 'address', 'sub_category_id', 'price', 'extras');
             $params['profile_id'] = $userProfile->id;
@@ -160,7 +160,7 @@ class UserController extends Controller
     public function uploadAdvertisementImage(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             $params = $request->only('advertisement_id');
             $images = $request->file('images');
@@ -193,10 +193,10 @@ class UserController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function others()
+    public function others(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $service = [];
             $business = [];
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
@@ -232,7 +232,7 @@ class UserController extends Controller
     public function createService(ServiceRequest $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             $params = $request->only('id', 'province_id', 'city_id', 'title', 'service_email', 'description', 'address', 'sub_category_id', 'service_no');
             $params['profile_id'] = $userProfile->id;
@@ -300,7 +300,7 @@ class UserController extends Controller
     public function createBusiness(BusinessRequest $request)
     {
         try {
-            $user = Auth::user();
+            $user = $request->user();
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             $params = $request->only('id', 'province_id', 'city_id', 'title', 'business_email', 'description', 'address', 'sub_category_id', 'sub_sub_category_id', 'business_no');
             $params['profile_id'] = $userProfile->id;

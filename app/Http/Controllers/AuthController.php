@@ -230,10 +230,10 @@ class AuthController extends Controller
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
         }
     }
-    public function logout()
+    public function logout(Request $request)
     {
         try {
-            Auth::logout();
+            auth('sanctum')->user()->tokens()->delete();
             return response()->json(['message' => 'You have logged out successfully'], 200);
         } catch (Exception $ex) {
             Log::channel('user_exception_log')->error($ex->getMessage());

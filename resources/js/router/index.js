@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import useAPIRequest from "../services/api-request";
 import Home from '../views/Home.vue';
 import AdvertisementList from '../views/AdvertiseList.vue';
 import Advertisement from '../views/Advertise.vue';
@@ -20,6 +21,8 @@ import ViewAdvertise from '../views/advertisement/View.vue';
 import ListingOther from '../views/others/List.vue';
 import CreateService from '../views/others/CreateService.vue';
 import CreateBusiness from '../views/others/CreateBusiness.vue';
+import { useStore } from "vuex";
+
 const routes = [
     {
         path: '/',
@@ -105,6 +108,12 @@ const routes = [
         path: '/create/advertise/:id',
         name: 'CreateAdvertise',
         component: CreateAdvertise,
+        // beforeEnter: async (to, from, next) => {
+        //     const { handleAPIRequest } =
+        //         useAPIRequest();
+        //     await handleAPIRequest("Bazzar", "Bazzar/FETCH_ADVERTISEMENT_DETAILS", { id: 0 });
+        //     next();
+        // }
     },
     {
         path: '/view/advertise/:id',

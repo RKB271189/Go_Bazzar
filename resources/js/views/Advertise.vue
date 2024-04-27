@@ -9,9 +9,8 @@
 </template>
 
 <script>
-import { onMounted, computed } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useStore } from "vuex";
 import Layout from "../components/user/Layout.vue";
 import Loader from "../components/Loader.vue";
 import Toast from "../components/Toast.vue";
@@ -25,7 +24,6 @@ export default {
     AdvertiseDetail,
   },
   setup() {
-    const store = useStore();
     const route = useRoute();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();

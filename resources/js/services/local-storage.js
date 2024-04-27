@@ -1,4 +1,4 @@
-export default function accessLocalStorage() {
+const accessLocalStorage = () => {
     const setLocalStorage = (key, value) => {
         const now = new Date();
         const timeInMiliSec = 3600 * 1000;
@@ -30,3 +30,4 @@ export default function accessLocalStorage() {
         removeLocalStorage
     }
 }
+export default accessLocalStorage;

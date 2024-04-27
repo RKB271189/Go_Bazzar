@@ -26,6 +26,17 @@ const getters = {
     others: state => state.others
 }
 const actions = {
+    async FETCH_MENU_ITEMS({ commit }) {
+        commit('RESET_RESPONSE_FLAG')
+        try {
+            let res = await axios.get('/api/menu')
+            if (res.status === 200) {
+                commit('SET_SUB_CATEGORIES', res.data.subcategories);
+            }
+        } catch (error) {
+            commit('SET_ERROR', error.response.data.error)
+        }
+    },
     async FETCH_HOME_DETAILS({ commit }) {
         commit('RESET_RESPONSE_FLAG')
         try {
@@ -34,8 +45,6 @@ const actions = {
                 commit('SET_ADVERTISEMENTS', res.data.advertisements);
                 commit('SET_SERVICES', res.data.services);
                 commit('SET_BUSINESSES', res.data.businesses);
-                commit('SET_SUB_CATEGORIES', res.data.subcategories);
-                // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
                 commit('SET_QUICK_ADVERTISEMENTS', res.data.quickadvertisements);
             }
         } catch (error) {
@@ -47,7 +56,6 @@ const actions = {
         try {
             let res = await axios.get('/api/advertise')
             if (res.status === 200) {
-                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 commit('SET_ADVERTISEMENTS', res.data.advertisements);
             }
         } catch (error) {
@@ -70,7 +78,6 @@ const actions = {
         try {
             let res = await axios.get('/api/service')
             if (res.status === 200) {
-                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
                 commit('SET_SERVICES', res.data.services);
             }
         } catch (error) {
@@ -82,8 +89,6 @@ const actions = {
         try {
             let res = await axios.get('/api/business')
             if (res.status === 200) {
-                // commit('SET_SUB_CATEGORIES', res.data.subcategories);
-                // commit('SET_SUB_SUB_CATEGORIES', res.data.subsubcategories);
                 commit('SET_BUSINESSES', res.data.businesses);
             }
         } catch (error) {

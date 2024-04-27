@@ -12,6 +12,7 @@ use App\Services\SubCategory;
 use App\Services\SubSubCategory;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class BazzarController extends Controller
@@ -24,10 +25,24 @@ class BazzarController extends Controller
         private Business $business
     ) {
     }
+    public function menus()
+    {
+        try {
+            if (Cache::has('SUB_CATEGORIES')) {
+                $subCategories = Cache::get('SUB_CATEGORIES');
+            } else {
+                $subCategories = $this->subCategory->getCollection();
+                Cache::put('SUB_CATEGORIES', $subCategories);
+            }
+            return response()->json(['subcategories' => $subCategories], 200);
+        } catch (Exception $ex) {
+            Log::channel('bazzar_exception_log')->error($ex->getMessage());
+            return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
+        }
+    }
     public function home()
     {
         try {
-            $subCategories = $this->subCategory->getCollection();
             $advertisements = $this->advertisement->getCollection(4);
             $advertisements = AdvertisementResource::collection($advertisements);
             $quickAdvertisements = [
@@ -56,7 +71,7 @@ class BazzarController extends Controller
             $services = ServiceResource::collection($services);
             $businesses = $this->business->getCollection(8);
             $businesses = BusinessResource::collection($businesses);
-            return response()->json(['subcategories' => $subCategories, 'advertisements' => $advertisements, 'quickadvertisements' => $quickAdvertisements, 'services' => $services, 'businesses' => $businesses], 200);
+            return response()->json(['advertisements' => $advertisements, 'quickadvertisements' => $quickAdvertisements, 'services' => $services, 'businesses' => $businesses], 200);
         } catch (Exception $ex) {
             Log::channel('bazzar_exception_log')->error($ex->getMessage());
             return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
