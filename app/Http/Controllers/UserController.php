@@ -19,6 +19,7 @@ use App\Services\Province;
 use App\Services\Service;
 use App\Services\SubCategory;
 use App\Services\SubSubCategory;
+use App\Services\User;
 use App\Services\UserProfile;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class UserController extends Controller
 {
     use FileStorage;
     public function __construct(
+        private User $user,
         private Province $province,
         private UserProfile $userProfile,
         private Advertisement $advertisement,
@@ -85,7 +87,7 @@ class UserController extends Controller
             if (!$userProfile) {
                 return response()->json(['error' => 'Please complete your profile first.'], 422);
             }
-            $advertisement = $this->advertisement->getAdvertisementByUserId($userProfile->id);
+            $advertisement = $this->user->getAdvertisement($user->id);
             $advertisement = AdvertisementResource::collection($advertisement);
             return response()->json(['advertisement' => $advertisement], 200);
         } catch (Exception $ex) {
@@ -128,7 +130,9 @@ class UserController extends Controller
             $userProfile = $this->userProfile->getProfileByUserId($user->id);
             $params = $request->only('id', 'province_id', 'city_id', 'title', 'description', 'expiry_date', 'address', 'sub_category_id', 'price', 'extras');
             $params['profile_id'] = $userProfile->id;
-            $params['extras'] = json_encode($params['extras']);
+            if (array_key_exists('extras', $params)) {
+                $params['extras'] = json_encode($params['extras']);
+            }
             if (empty($params['id']) || $params['id'] == null) {
                 unset($params['id']);
                 $advertisement = $this->advertisement->createCollection($params);

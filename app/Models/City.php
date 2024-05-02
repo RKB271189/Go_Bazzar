@@ -14,4 +14,7 @@ class City extends Model
         'province_id',
         'name'
     ];
+    public function advertisements(){
+        return $this->hasMany(Advertisement::class);
+    }
 }

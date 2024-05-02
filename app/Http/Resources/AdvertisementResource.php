@@ -16,7 +16,7 @@ class AdvertisementResource extends JsonResource
     {
         $data = [
             'id' => $this->id,
-            'profile_id' => $this->profile_id,
+            // 'profile_id' => $this->profile_id,
             'province_id' => $this->province_id,
             'city_id' => $this->city_id,
             'province' => $this->province->name,

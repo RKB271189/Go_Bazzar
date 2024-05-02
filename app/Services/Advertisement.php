@@ -13,14 +13,9 @@ final class Advertisement extends ServiceRepository
     {
         parent::__construct($advertisement);
     }
-    public function getAdvertisementByUserId(int $profileId): ?Collection
-    {
-        $collection = $this->advertisement->with('province')->with('city')->with('profile')->where('profile_id', $profileId)->get();
-        return $collection ? $collection : null;
-    }
     public function getCollectionById(int $id): Model
     {
-        $collection = $this->advertisement->with('province')->with('city')->with('profile')->with('image')->where('id', $id)->first();
+        $collection = $this->advertisement->with('profile', 'province', 'city', 'image')->where('id', $id)->first();
         return $collection ? $collection : null;
     }
     public function getCollectionByCategoryId(int $subCategoryId): ?Collection

@@ -20,4 +20,12 @@ class UserProfile extends Model
         'contact_no',
         'postal_code',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function advertisements()
+    {
+        return $this->hasMany(Advertisement::class);
+    }
 }

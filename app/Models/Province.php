@@ -18,4 +18,8 @@ class Province extends Model
     {
         return $this->hasMany(City::class);
     }
+    public function advertisements()
+    {
+        return $this->hasMany(Advertisement::class);
+    }
 }
