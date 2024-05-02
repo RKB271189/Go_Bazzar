@@ -1,7 +1,7 @@
 <template>
-  <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
-  <Layout>
+  <Loader v-if="loading"></Loader>
+  <Layout v-else>
     <template v-slot:menu-content>
       <SideNav />
     </template>

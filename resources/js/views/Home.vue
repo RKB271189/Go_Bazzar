@@ -1,7 +1,7 @@
 <template>
-  <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
-  <Layout>
+  <Loader v-if="loading"></Loader>
+  <Layout v-else>
     <template v-slot:page-content>
       <Title :heading="'Our Market Place'" :viewmore="false" :linkto="null" />
       <div class="row">
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from "vue";
+import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import Layout from "../components/user/Layout.vue";
