@@ -33,7 +33,7 @@ const getters = {
     businesses: state => state.businesses,
     business: state => state.business,
 }
-const actions = {
+const actions = {    
     async USER_FETCH_PROFILE({ commit }) {
         commit('RESET_RESPONSE_FLAG')
         try {

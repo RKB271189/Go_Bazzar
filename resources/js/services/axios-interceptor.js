@@ -1,6 +1,6 @@
 import router from "../router";
 import accessLocalStorage from "./local-storage";
-function setupAxiosInterceptors(store) {
+const setupAxiosInterceptors = (store) => {
     axios.interceptors.request.use(
         (config) => {
             let passportToken = store.state.Auth.passportToken;

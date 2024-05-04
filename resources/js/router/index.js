@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import useAPIRequest from "../services/api-request";
 import Home from '../views/Home.vue';
 import AdvertisementList from '../views/AdvertiseList.vue';
 import Advertisement from '../views/Advertise.vue';
@@ -21,8 +20,9 @@ import ViewAdvertise from '../views/advertisement/View.vue';
 import ListingOther from '../views/others/List.vue';
 import CreateService from '../views/others/CreateService.vue';
 import CreateBusiness from '../views/others/CreateBusiness.vue';
-import { useStore } from "vuex";
-
+// import useAPIRequest from "../services/api-request";
+// import accessLocalStorage from "../services/local-storage";
+// import setupAxiosInterceptors from "../services/axios-interceptor";
 const routes = [
     {
         path: '/',
@@ -75,7 +75,7 @@ const routes = [
         component: Contact,
     },
     {
-        path: '/login',
+        path: '/login/:slug?',
         name: 'Login',
         component: Login,
     },
@@ -93,47 +93,49 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/profile',
         name: 'Profile',
         component: Profile,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/advertise',
         name: 'Advertise',
         component: Advertise,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/create/advertise/:id',
         name: 'CreateAdvertise',
         component: CreateAdvertise,
-        // beforeEnter: async (to, from, next) => {
-        //     const { handleAPIRequest } =
-        //         useAPIRequest();
-        //     await handleAPIRequest("Bazzar", "Bazzar/FETCH_ADVERTISEMENT_DETAILS", { id: 0 });
-        //     next();
-        // }
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/view/advertise/:id',
         name: 'ViewAdvertise',
         component: ViewAdvertise,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/list/other',
         name: 'ListingOther',
         component: ListingOther,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/create/service/:id',
         name: 'CreateService',
         component: CreateService,
+        meta: { requiresServerValidation: true }
     },
     {
         path: '/create/business/:id',
         name: 'CreateBusiness',
         component: CreateBusiness,
+        meta: { requiresServerValidation: true }
     }
 ];
 const router = createRouter(
@@ -142,4 +144,21 @@ const router = createRouter(
         routes
     }
 );
+// router.beforeEach(async (to, from, next) => {
+//     if (to.meta.requiresServerValidation) {
+//         const { getLocalStorage } = accessLocalStorage();
+//         const passport_token = getLocalStorage('passport-token');
+//         await setupAxiosInterceptors(passport_token);
+//         const { handleAPIRequest, hasError } =
+//             useAPIRequest();
+//         await handleAPIRequest("User", "User/USER_FETCH_PROFILE");
+//         if (hasError.value) {
+//             router.push('/login');
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next();
+//     }
+// });
 export default router;

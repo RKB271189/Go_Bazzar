@@ -24,10 +24,15 @@ const accessLocalStorage = () => {
     const removeLocalStorage = (key) => {
         localStorage.removeItem(key);
     }
+    const validateAuthorizationLocal = () => {
+        const pToken = getLocalStorage("passport-token");
+        return pToken ? true : false;
+    }
     return {
         setLocalStorage,
         getLocalStorage,
-        removeLocalStorage
+        removeLocalStorage,
+        validateAuthorizationLocal
     }
 }
 export default accessLocalStorage;

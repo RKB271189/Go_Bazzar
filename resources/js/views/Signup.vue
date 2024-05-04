@@ -1,7 +1,7 @@
 <template>
-  <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
-  <section class="bg-light py-3 py-md-5">
+  <Loader v-if="loading"></Loader>
+  <section class="bg-light py-3 py-md-5" v-else>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-5">

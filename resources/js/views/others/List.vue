@@ -8,6 +8,7 @@
     <template v-slot:page-content>
       <h4 class="mt-4">Your Services and Business</h4>
       <Warning
+        v-if="warning"
         :message="'You do not have any Services or Business listed'"
       ></Warning>
       <div class="row">
@@ -65,8 +66,7 @@
       <script>
 import Layout from "../../components/user/Layout.vue";
 import SideNav from "../../components/user/account/SideNav.vue";
-import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
+import { onMounted, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import Loader from "../../components/Loader.vue";
 import Toast from "../../components/Toast.vue";
@@ -85,12 +85,17 @@ export default {
     DirectoryCard,
   },
   setup() {
-    const router = useRouter();
     const store = useStore();
     const { hasError, message, loading, showToast, status, handleAPIRequest } =
       useAPIRequest();
     const services = computed(() => store.getters["User/services"]);
     const businesses = computed(() => store.getters["User/businesses"]);
+    const warning = ref(true);
+    warning.value =
+      Object.keys(services.value).length === 0 &&
+      Object.keys(businesses.value) === 0
+        ? true
+        : false;
     onMounted(() => {
       fetchUserOthers();
     });
@@ -104,6 +109,7 @@ export default {
       message,
       hasError,
       status,
+      warning,
       services,
       businesses,
     };

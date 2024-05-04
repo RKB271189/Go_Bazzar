@@ -1,7 +1,7 @@
 <template>
-  <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
-  <section class="bg-light py-3 py-md-5">
+  <Loader v-if="loading"></Loader>
+  <section class="bg-light py-3 py-md-5" v-else>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -39,12 +39,29 @@
                     <div class="form-floating mb-3">
                       <input
                         v-model="password"
-                        type="password"
+                        :type="passwordType"
                         class="form-control"
                         name="password"
                         id="password"
                         required
                       />
+                      <span
+                        class="position-absolute top-50 translate-middle-y"
+                        :style="{ right: '5px' }"
+                      >
+                        <EyeIcon
+                          class="hero-icon"
+                          :style="{ cursor: 'pointer' }"
+                          v-if="passwordType === 'password'"
+                          @click="tooglePasswordShow(`text`)"
+                        ></EyeIcon>
+                        <EyeSlashIcon
+                          class="hero-icon"
+                          :style="{ cursor: 'pointer' }"
+                          @click="tooglePasswordShow(`password`)"
+                          v-else
+                        ></EyeSlashIcon>
+                      </span>
                       <label for="password" class="form-label">Password</label>
                     </div>
                   </div>
@@ -169,27 +186,42 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Loader from "../components/Loader.vue";
 import Toast from "../components/Toast.vue";
 import useAPIRequest from "../services/api-request";
 import accessLocalStorage from "../services/local-storage";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
 export default {
   components: {
     Loader,
     Toast,
+    EyeIcon,
+    EyeSlashIcon,
   },
   setup() {
     const router = useRouter();
     const store = useStore();
+    const route = useRoute();
     const { hasError, message, loading, showToast, handleAPIRequest } =
       useAPIRequest();
     const { setLocalStorage } = accessLocalStorage();
     const email = ref("");
     const password = ref("");
     const remember = ref(false);
+    const passwordType = ref("password");
+    const tooglePasswordShow = (type) => {
+      passwordType.value = type;
+    };
+    onMounted(() => {
+      if (route.params.slug === "unautorized") {
+        showToast.value = true;
+        message.value = "Please login! To proceed further";
+        hasError.value = true;
+      }
+    });
     const userVerify = async () => {
       let params = {
         email: email.value,
@@ -213,6 +245,8 @@ export default {
       email,
       password,
       remember,
+      passwordType,
+      tooglePasswordShow,
       userVerify,
     };
   },
