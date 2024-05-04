@@ -216,7 +216,7 @@ export default {
       passwordType.value = type;
     };
     onMounted(() => {
-      if (route.params.slug === "unautorized") {
+      if (route.params.slug === "unauthorized") {
         showToast.value = true;
         message.value = "Please login! To proceed further";
         hasError.value = true;

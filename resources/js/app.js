@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
         if (validateAuthorizationLocal()) {
             next();
         } else {
-            router.push(`/login/${"unautorized"}`);
+            router.push(`/login/${"unauthorized"}`);
         }
     } else {
         next();
