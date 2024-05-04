@@ -50,14 +50,14 @@
                         :style="{ right: '5px' }"
                       >
                         <EyeIcon
-                          class="hero-icon"
-                          :style="{ cursor: 'pointer' }"
+                          class="hero-icon-small"
+                          :style="{ cursor: 'pointer', color: '#8c8787' }"
                           v-if="passwordType === 'password'"
                           @click="tooglePasswordShow(`text`)"
                         ></EyeIcon>
                         <EyeSlashIcon
-                          class="hero-icon"
-                          :style="{ cursor: 'pointer' }"
+                          class="hero-icon-small"
+                          :style="{ cursor: 'pointer', color: '#8c8787' }"
                           @click="tooglePasswordShow(`password`)"
                           v-else
                         ></EyeSlashIcon>
