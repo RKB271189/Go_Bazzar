@@ -196,14 +196,25 @@ class AuthController extends Controller
             $params = $request->only('email', 'password', 'remember');
             $remember = boolval($params['remember']);
             unset($params['remember']);
-            if (Auth::attempt($params, $remember)) {
-                Log::channel('user_activity_log')->info('User with email :' . $params['email'] . ' logged in');
-                $user = Auth::user();
-                $userId = $user->id;
-                $token = $user->createToken($userId . '' . $params['email']);
-                return response()->json(['token' => $token->plainTextToken, 'message' => 'You have logged in successfully'], 200);
+            $user = $this->user->validateEmail($params['email']);
+            if (!$user) {
+                return response()->json(['error' => 'Provided email does not exist. Please register!'], 404);
             } else {
-                return response()->json(['error' => 'You have provided invalid credentials'], 401);
+                if (Hash::check($params['password'], $user->password)) {
+                    Log::channel('user_activity_log')->info('User with email :' . $params['email'] . ' logged in');
+                    $userId = $user->id;
+                    $token = $user->createToken($userId . '' . $params['email']);
+                    if ($user->hasRole('admin')) {
+                        $redirectUrl = '/dashboard';
+                    } else if ($user->hasRole('staff')) {
+                        $redirectUrl = '/dashboard';
+                    } else {
+                        $redirectUrl = '/profile';
+                    }
+                    return response()->json(['token' => $token->plainTextToken, 'url' => $redirectUrl, 'message' => 'You have logged in successfully'], 200);
+                } else {
+                    return response()->json(['error' => 'You have provided invalid credentials'], 401);
+                }
             }
         } catch (Exception $ex) {
             Log::channel('user_exception_log')->error($ex->getMessage());
