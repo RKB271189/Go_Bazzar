@@ -1,16 +1,20 @@
 <template>
-  <Loader v-if="loading"></Loader>
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
-  <Layout>
+  <Loader v-if="loading"></Loader>
+  <Layout v-else>
+    <template v-slot:menu-content>
+      <SideNav />
+    </template>
     <template v-slot:page-content>
-      <h4 class="mt-4">Your Daily Analysis</h4>
-      <div class="row"></div>
+      <h4 class="mt-4">Your account analysis</h4>
+      <div class="row">Comming Soon</div>
     </template>
   </Layout>
 </template>
 
 <script>
-import Layout from "../components/user/account/Layout.vue";
+import Layout from "../components/user/Layout.vue";
+import SideNav from "../components/user/account/SideNav.vue";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import Loader from "../components/Loader.vue";
@@ -21,6 +25,7 @@ export default {
     Loader,
     Toast,
     Layout,
+    SideNav,
   },
   setup() {
     const router = useRouter();
@@ -28,7 +33,7 @@ export default {
       useAPIRequest();
     let params = {};
     onMounted(() => {
-      userDailyAnalysis();
+      //userDailyAnalysis();
     });
     const userDailyAnalysis = async () => {
       await handleAPIRequest(

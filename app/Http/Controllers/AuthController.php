@@ -135,7 +135,8 @@ class AuthController extends Controller
                 return response()->json(['error' => 'The code given is invalid'], 400);
             } else {
                 unset($params['code']);
-                $this->user->createCollection($params);
+                $user = $this->user->createCollection($params);
+                $user->assignRole('user');
                 Log::channel('user_activity_log')->info('User with email :' . $params['email'] . ' created account');
                 Mail::to($params['email'])->send(new CreateAccount($params['email']));
                 return response()->json(['message' => 'Your account has been created successfully'], 200);
@@ -205,7 +206,7 @@ class AuthController extends Controller
                     $userId = $user->id;
                     $token = $user->createToken($userId . '' . $params['email']);
                     if ($user->hasRole('admin')) {
-                        $redirectUrl = '/dashboard';
+                        $redirectUrl = '/admin/roles';
                     } else if ($user->hasRole('staff')) {
                         $redirectUrl = '/dashboard';
                     } else {

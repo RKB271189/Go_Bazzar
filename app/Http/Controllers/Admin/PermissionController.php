@@ -1,17 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Services\Permission;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
+
+    public function __construct(private Permission $permission)
+    {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $permissions = $this->permission->getPermissions();
+        return response()->json(['permissions' => $permissions], 200);
     }
 
     /**
@@ -19,7 +26,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -27,7 +33,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->except('_method', '_token');
+        $this->permission->createPermission($params);
+        return response()->json(['message' => 'Permission created successfully'], 200);
     }
 
     /**
@@ -43,7 +51,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $permission = $this->permission->getPermission($id);
+        return response()->json(['permission' => $permission], 200);
     }
 
     /**
@@ -51,7 +60,6 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
     }
 
     /**
@@ -59,6 +67,7 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->permission->deletePermission($id);
+        return response()->json(['message' => 'Permission deleted successfully'], 200);
     }
 }

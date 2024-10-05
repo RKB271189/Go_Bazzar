@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useStore } from "vuex";
 const useAPIRequest = () => {
     const status = ref(null);
@@ -7,10 +7,14 @@ const useAPIRequest = () => {
     const loading = ref(false);
     const showToast = ref(false);
     const store = useStore();
-    const handleAPIRequest = async (module, dispatchAction, params = {}) => {
+    const handleAPIRequest = async (
+        module,
+        dispatchAction,
+        params = String | {}
+    ) => {
         loading.value = true;
         showToast.value = false;
-        await store.dispatch(dispatchAction, params)
+        await store.dispatch(dispatchAction, params);
         loading.value = false;
         hasError.value = store.getters[`${module}/hasError`];
         message.value = store.getters[`${module}/message`];
@@ -28,5 +32,5 @@ const useAPIRequest = () => {
         status,
         handleAPIRequest,
     };
-}
+};
 export default useAPIRequest;

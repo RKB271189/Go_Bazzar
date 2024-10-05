@@ -20,9 +20,12 @@ import ViewAdvertise from '../views/advertisement/View.vue';
 import ListingOther from '../views/others/List.vue';
 import CreateService from '../views/others/CreateService.vue';
 import CreateBusiness from '../views/others/CreateBusiness.vue';
-// import useAPIRequest from "../services/api-request";
-// import accessLocalStorage from "../services/local-storage";
-// import setupAxiosInterceptors from "../services/axios-interceptor";
+import ForbiddenError from '../views/403.vue';
+/** this are Admin Routes */
+import Roles from '../views/admin/Roles.vue';
+import AdminDashboard from '../views/admin/Dashboard.vue';
+import AdminAdvertise from '../views/admin/Advertise.vue';
+
 const routes = [
     {
         path: '/',
@@ -136,6 +139,27 @@ const routes = [
         name: 'CreateBusiness',
         component: CreateBusiness,
         meta: { requiresServerValidation: true }
+    },
+    {
+        path: '/request-error',
+        name: 'ForbiddenError',
+        component: ForbiddenError,
+    },
+    /** All admin paths here */
+    {
+        path: '/admin/roles',
+        name: 'Roles',
+        component: Roles
+    },
+    {
+        path: '/admin/dashboard',
+        name: 'AdminDashboard',
+        component: AdminDashboard
+    },
+    {
+        path: '/admin/advertise',
+        name: 'AdminAdvertise',
+        component: AdminAdvertise
     }
 ];
 const router = createRouter(

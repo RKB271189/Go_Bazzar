@@ -21,8 +21,11 @@ const setupAxiosInterceptors = (store) => {
             return response;
         },
         (error) => {
+            console.log(error.response.status);
             if (error.response.status === 401) {
                 router.push('/login');
+            } else if (error.response.status === 403) {
+                router.push('/request-error');
             }
             return Promise.reject(error);
         }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdvertiseController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BazzarController;
 use App\Http\Controllers\DashboardController;
@@ -37,17 +40,29 @@ Route::get('/newspaper', [BazzarController::class, 'newspaper']);
 Route::get('/fetch/advertise/{id}', [UserController::class, 'singleAdvertisement']);
 Route::get('/fetch/service/{id}', [UserController::class, 'singleService']);
 Route::get('/fetch/business/{id}', [UserController::class, 'singleBusiness']);
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/daily/analysis', [DashboardController::class, 'dailyAnalysis']);
-    Route::get('/fetch/profile', [UserController::class, 'fetchProfile']);
-    Route::post('/create/profile', [UserController::class, 'createProfile']);
-    Route::get('/fetch/advertise', [UserController::class, 'advertisment']);
-    Route::post('/create/advertise', [UserController::class, 'createAdvertisement']);
-    Route::post('/upload/advertise/image', [UserController::class, 'uploadAdvertisementImage']);
-    Route::get('/fetch/others', [UserController::class, 'others']);
-    Route::post('/create/service', [UserController::class, 'createService']);
-    Route::post('/create/business', [UserController::class, 'createBusiness']);
+Route::middleware(['auth:sanctum', 'auth:api'])->group(function () {
+    Route::middleware('role.admin')->group(function () {
+        //Route::get('/role-list', [RoleController::class, 'index']);
+        Route::resource('roles', RoleController::class);
+        Route::get('/roles/{role}/permissions', [RoleController::class, 'permissions']);
+        Route::post('/roles/assign/permission', [RoleController::class, 'assignPermissionToRole']);
+        Route::resource('permissions', PermissionController::class);
+        Route::get('/admin/fetch/advertise', [AdvertiseController::class, 'fetch'])->name('admin.advertise');
+    });
+    Route::middleware('role.user')->group(function () {
+        Route::get('/daily/analysis', [DashboardController::class, 'dailyAnalysis']);
+        Route::get('/fetch/profile', [UserController::class, 'fetchProfile']);
+        Route::post('/create/profile', [UserController::class, 'createProfile']);
+        Route::get('/fetch/advertise', [UserController::class, 'advertisment']);
+        Route::post('/create/advertise', [UserController::class, 'createAdvertisement']);
+        Route::post('/upload/advertise/image', [UserController::class, 'uploadAdvertisementImage']);
+        Route::get('/fetch/others', [UserController::class, 'others']);
+        Route::post('/create/service', [UserController::class, 'createService']);
+        Route::post('/create/business', [UserController::class, 'createBusiness']);
+    });
 });
+/** Admin routes */
+
 Route::post('logout', [AuthController::class, 'logout']);
 
 //Miscellaneous routes

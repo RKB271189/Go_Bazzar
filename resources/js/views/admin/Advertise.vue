@@ -3,13 +3,13 @@
   <Toast :showToast="showToast" :message="message" :hasError="hasError"></Toast>
   <Layout>
     <template v-slot:page-content>
-      <h4 class="mt-4">Recent Activity on Website</h4>
+      <h4 class="mt-4">All Advertisement</h4>
       <div class="row"></div>
     </template>
   </Layout>
 </template>
-  
-  <script>
+    
+    <script>
 import Layout from "../../components/admin/Layout.vue";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -47,6 +47,6 @@ export default {
   },
 };
 </script>
-  
-  <style>
+    
+    <style>
 </style>

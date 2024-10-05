@@ -234,7 +234,7 @@ export default {
           "passport-token",
           computed(() => store.getters["Auth/passportToken"]).value
         );
-        router.push("/profile");
+        router.push(computed(() => store.getters["Auth/redirectURL"]).value);
       }
     };
     return {

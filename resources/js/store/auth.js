@@ -2,12 +2,14 @@ import { commonInitialState, commonGetters, commonMutations } from "./common"
 function initialState() {
     return {
         ...commonInitialState,
-        passportToken: null
+        passportToken: null,
+        redirectURL: null
     }
 }
 const getters = {
     ...commonGetters,
     passportToken: state => state.passportToken,
+    redirectURL: state => state.redirectURL
 }
 const actions = {
     async USER_SEND_CODE({ commit }, params) {
@@ -38,6 +40,7 @@ const actions = {
             let res = await axios.post('/api/verify/account', params)
             if (res.status === 200) {
                 commit('SET_PASSPORT_TOKEN', res.data.token)
+                commit('SET_REDIRECT_URL', res.data.url)
                 commit('SET_SUCCESS', res.data.message)
             }
         } catch (error) {
@@ -73,6 +76,9 @@ const mutations = {
     ...commonMutations,
     SET_PASSPORT_TOKEN(state, value) {
         state.passportToken = value
+    },
+    SET_REDIRECT_URL(state, value) {
+        state.redirectURL = value
     }
 }
 export default {
